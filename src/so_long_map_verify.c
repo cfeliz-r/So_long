@@ -6,7 +6,7 @@
 /*   By: cfeliz-r <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/13 13:25:15 by cfeliz-r          #+#    #+#             */
-/*   Updated: 2024/07/13 13:25:17 by cfeliz-r         ###   ########.fr       */
+/*   Updated: 2024/07/14 00:23:28 by cfeliz-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int	map_verifications(t_data *mlx)
 		return (0);
 	if (mlx->exits != 1 || mlx->player != 1 || mlx->total_collectibles < 1)
 	{
-		ft_putstr_fd("\033[0;31mError\nInvalid number of items!❌\033[0;37m\n", 2);
+		ft_putstr_fd("Error\nInvalid number of items!\n", 2);
 		return (0);
 	}
 	if (!closed_map(mlx))

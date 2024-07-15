@@ -6,7 +6,7 @@
 /*   By: cfeliz-r <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/13 13:21:43 by cfeliz-r          #+#    #+#             */
-/*   Updated: 2024/07/13 13:30:15 by cfeliz-r         ###   ########.fr       */
+/*   Updated: 2024/07/15 19:26:45 by cfeliz-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,11 +118,7 @@ void	print_map(char **map);
 int		free_the_map(char **map, t_data *mlx);
 int		ft_xbutton(t_data *mlx);
 int		free_invalid_map(t_data *mlx);
-void	free_map(char **map);
 int		free_invalid_fd(t_data *mlx);
-
-//free2
-
 void	free_elements(char **map);
 int		free_invalid_chars(t_data *mlx);
 int		free_invalid_map2(t_data *mlx);

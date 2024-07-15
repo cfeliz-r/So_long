@@ -6,7 +6,7 @@
 /*   By: cfeliz-r <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/13 13:21:00 by cfeliz-r          #+#    #+#             */
-/*   Updated: 2024/07/13 13:21:33 by cfeliz-r         ###   ########.fr       */
+/*   Updated: 2024/07/15 19:26:15 by cfeliz-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ int	free_the_map(char **map, t_data *mlx)
 	mlx_destroy_image(mlx->mlx_ptr, mlx->enemy_a_img);
 	mlx_destroy_image(mlx->mlx_ptr, mlx->enemy_s_img);
 	mlx_destroy_image(mlx->mlx_ptr, mlx->enemy_d_img);
-	free_map(map);
+	free_elements(map);
 	free(mlx->mlx_ptr);
 	exit(0);
 }
@@ -94,19 +94,6 @@ int	free_invalid_map(t_data *mlx)
 	mlx_destroy_display(mlx->mlx_ptr);
 	free(mlx->mlx_ptr);
 	exit(0);
-}
-
-void	free_map(char **map)
-{
-	int	i;
-
-	i = 0;
-	while (map[i])
-	{
-		free(map[i]);
-		i++;
-	}
-	free(map);
 }
 
 int	free_invalid_fd(t_data *mlx)

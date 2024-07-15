@@ -6,7 +6,7 @@
 #    By: cfeliz-r <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/07/13 13:57:09 by cfeliz-r          #+#    #+#              #
-#    Updated: 2024/07/13 14:04:08 by cfeliz-r         ###   ########.fr        #
+#    Updated: 2024/07/15 19:20:19 by cfeliz-r         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -41,7 +41,7 @@ $(LIBFT):
 	@$(MAKE) -C ./libft
 
 $(MLX):
-	@$(MAKE) -C ./minilibx-linux
+	@$(MAKE) -C ./minilibx-linux --silent
 
 
 $(NAME): $(OBJS) $(LIBFT) $(MLX)
@@ -49,13 +49,14 @@ $(NAME): $(OBJS) $(LIBFT) $(MLX)
 	cp $(LIBFT) .
 
 clean:
-	@$(MAKE) clean -C ./libft
-	@$(MAKE) clean -C ./minilibx-linux
+	@$(MAKE) clean -C ./libft --silent
+	@$(MAKE) clean -C ./minilibx-linux --silent
 	@$(RM) $(OBJS)
 	@$(RM) $(NAME)
 
 fclean: clean
-	@$(MAKE) fclean -C ./libft
-	@$(MAKE) clean -C ./minilibx-linux
+	@$(MAKE) fclean -C ./libft --silent
+	@$(MAKE) clean -C ./minilibx-linux --silent
 	@$(RM) libft.a
 re: fclean all
+.PHONY: all re clean fclean
