@@ -6,7 +6,7 @@
 /*   By: cfeliz-r <cfeliz-r@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/19 10:29:19 by cfeliz-r          #+#    #+#             */
-/*   Updated: 2024/07/13 13:36:34 by cfeliz-r         ###   ########.fr       */
+/*   Updated: 2024/06/26 20:03:45 by cfeliz-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 # include <unistd.h>
 # include <stdlib.h>
 # include "get_next_line/get_next_line.h"
+# include "get_next_line/get_next_line_bonus.h"
 # include <stdarg.h>
 
 # ifndef BUFFER_SIZE

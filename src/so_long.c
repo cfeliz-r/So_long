@@ -5,31 +5,40 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: cfeliz-r <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/07/13 13:19:24 by cfeliz-r          #+#    #+#             */
-/*   Updated: 2024/07/13 13:19:32 by cfeliz-r         ###   ########.fr       */
+/*   Created: 2024/07/16 17:07:15 by cfeliz-r          #+#    #+#             */
+/*   Updated: 2024/07/16 17:07:17 by cfeliz-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-int	main(int argc, char **argv)
+int	isber(char *file)
 {
-	t_data	mlx;
+	int				len;
 
-	srand(time(0));
-	(void)argv;
-	if (argc != 2)
+	len = ft_strlen(file);
+	if (file == 0)
 		return (0);
-	if (!mapname(argv[1]))
+	if (len < 5)
 		return (0);
-	struct_initialize(&mlx);
-	mlx.mlx_ptr = mlx_init();
-	if (mlx.mlx_ptr == NULL)
+	if (ft_strcmp(file + len - 4, ".ber") != 0)
 		return (0);
-	xpm_to_image(&mlx);
-	load_map(&mlx, argv[1]);
-	mlx_hook(mlx.win_ptr, KeyPress, KeyPressMask, ft_keypress, &mlx);
-	mlx_hook(mlx.win_ptr, DestroyNotify, ButtonPressMask, ft_xbutton, &mlx);
-	mlx_loop_hook(mlx.mlx_ptr, ft_animation, &mlx);
-	mlx_loop(mlx.mlx_ptr);
+	return (1);
+}
+
+int	main(int ac, char *av[])
+{
+	t_root			*root;
+
+	if (ac != 2)
+		die("invalid number of arguments", 0);
+	if (isber(av[1]) == 0)
+		die("invalid argument (<name>.ber)", 0);
+	root = root_init(av[1]);
+	draw(root);
+	mlx_hook(root->mlx_win, 2, 1L << 0, key_press, root);
+	mlx_hook(root->mlx_win, 3, 1L << 1, key_release, root);
+	mlx_hook(root->mlx_win, 17, 1L << 17, destroy_hook, root);
+	mlx_loop(root->mlx);
+	return (0);
 }

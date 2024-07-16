@@ -6,7 +6,7 @@
 #    By: cfeliz-r <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/04 14:53:34 by cfeliz-r          #+#    #+#              #
-#    Updated: 2024/07/13 13:35:40 by cfeliz-r         ###   ########.fr        #
+#    Updated: 2024/06/26 19:59:44 by cfeliz-r         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -50,7 +50,9 @@ SRCS		= ft_atoi.c \
 		  ft_putstr.c \
 		  ft_words.c \
 		  get_next_line/get_next_line.c \
-		  get_next_line/get_next_line_utils.c
+		  get_next_line/get_next_line_utils.c \
+		  get_next_line/get_next_line_bonus.c \
+		  get_next_line/get_next_line_utils_bonus.c
 
 SRCS_BONUS	= ft_lstadd_back.c \
 		  ft_lstadd_front.c \

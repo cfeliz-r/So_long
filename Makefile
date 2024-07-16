@@ -1,62 +1,65 @@
-# **************************************************************************** #
-#                                                                              #
-#                                                         :::      ::::::::    #
-#    Makefile                                           :+:      :+:    :+:    #
-#                                                     +:+ +:+         +:+      #
-#    By: cfeliz-r <marvin@42.fr>                    +#+  +:+       +#+         #
-#                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2024/07/13 13:57:09 by cfeliz-r          #+#    #+#              #
-#    Updated: 2024/07/15 19:20:19 by cfeliz-r         ###   ########.fr        #
-#                                                                              #
-# **************************************************************************** #
+NAME		=	so_long
+CC			=	gcc
+FLAGS		=	-Wall -Wextra -Werror
+MLX_DIR		=	mlx
+LFT			=	libft/libft.a
+INC			=	-I ./inc -I ./libft -I ./mlx
+LIB			=	-L ./libft -lft -L ./mlx -lmlx -lXext -lX11 -lm -lbsd
 
-NAME = so_long
+SRC			=	src/die.c \
+				src/draw.c \
+				src/event.c \
+				src/game_destroy.c \
+				src/game_init.c \
+				src/map_height.c \
+				src/map_init.c \
+				src/map_isvalid.c \
+				src/map_parsing.c \
+				src/map_read.c \
+				src/map_width.c \
+				src/mlx_utils.c \
+				src/move_player.c \
+				src/root_destroy.c \
+				src/root_init.c \
+				src/so_long.c \
+				src/update.c
 
-CC = cc -g
-CFLAGS = -Wall -Wextra -Werror -g3 -fsanitize=address,undefined
-MFLAGS = -lX11 -lXext
-RM = rm -rf
+# Convertir la lista de archivos fuente en archivos objeto
+OBJ			=	$(SRC:src/%.c=obj/%.o)
 
-LIBFT = ./libft/libft.a
-MLX = ./minilibx-linux/libmlx_Linux.a
+all:		$(MLX_DIR)/libmlx.a $(LFT) obj $(NAME)
 
-SRCS =		src/so_long.c \
-		src/so_long_free2.c \
-		src/so_long_map_verify2.c \
-		src/so_long_draw_map2.c \
-		src/so_long_free.c \
-		src/so_long_map_verify.c \
-		src/so_long_draw_map.c \
-		src/so_long_map_handler.c \
-		src/so_long_movements.c \
-		src/so_long_enemy.c \
-		src/so_long_map_handler_utils.c \
-		src/so_long_utils.c
+$(NAME):	$(OBJ)
+			$(CC) $(FLAGS) -o $@ $^ $(LIB)
 
-OBJS = $(SRCS:%.c=%.o)
+$(MLX_DIR)/libmlx.a:
+			@echo " [ .. ] | Compiling minilibx.."
+			@make -s -C $(MLX_DIR)
+			@echo " [ OK ] | Minilibx ready!"
 
-all: $(NAME)
+$(LFT):		
+			@echo " [ .. ] | Compiling libft.."
+			@make -s -C libft
+			@echo " [ OK ] | Libft ready!"
 
-$(LIBFT):
-	@$(MAKE) -C ./libft
+obj:
+			@mkdir -p obj
 
-$(MLX):
-	@$(MAKE) -C ./minilibx-linux --silent
-
-
-$(NAME): $(OBJS) $(LIBFT) $(MLX)
-	@$(CC) $(CFLAGS) $(OBJS) $(LIBFT) $(MLX) $(MFLAGS) -o $(NAME)
-	cp $(LIBFT) .
+obj/%.o:	src/%.c
+			$(CC) $(FLAGS) $(INC) -o $@ -c $<
 
 clean:
-	@$(MAKE) clean -C ./libft --silent
-	@$(MAKE) clean -C ./minilibx-linux --silent
-	@$(RM) $(OBJS)
-	@$(RM) $(NAME)
+			@make -s $@ -C libft
+			@rm -rf $(OBJ) obj
+			@echo "object files removed."
 
-fclean: clean
-	@$(MAKE) fclean -C ./libft --silent
-	@$(MAKE) clean -C ./minilibx-linux --silent
-	@$(RM) libft.a
-re: fclean all
-.PHONY: all re clean fclean
+fclean:		clean
+			@make -s $@ -C libft
+			@make -s clean -C $(MLX_DIR)
+			@rm -rf $(NAME)
+			@echo "binary file removed."
+
+re:			fclean all
+
+.PHONY:		all clean fclean re
+
