@@ -58,9 +58,9 @@ typedef struct s_root
 
 void			exit_with_error(char *errmsg, int errnum);
 void			render_frame(t_root *root);
-int				key_press(int keycode, t_root *root);
-int				key_release(int keycode, t_root *root);
-int				destroy_hook(int keycode, t_root *root);
+int				handle_key_press(int keycode, t_root *root);
+int				handle_key_release(int keycode, t_root *root);
+int				handle_destroy_hook(int keycode, t_root *root);
 void			game_destroy(t_game *game);
 void			game_init(t_root *root, char *filename);
 void			map_height(t_root *root, char *file);

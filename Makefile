@@ -20,7 +20,7 @@ LIB			=	-L ./libft -lft -L ./mlx -lmlx -lXext -lX11 -lm -lbsd
 
 SRC			=	src/handle_error.c \
 				src/draw_and_render.c \
-				src/event.c \
+				src/handle_key_event.c \
 				src/game_destroy.c \
 				src/game_init.c \
 				src/map_height.c \

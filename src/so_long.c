@@ -36,9 +36,9 @@ int	main(int ac, char *av[])
 		exit_with_error("invalid argument (<name>.ber)", 0);
 	root = root_init(av[1]);
 	render_frame(root);
-	mlx_hook(root->mlx_win, 2, 1L << 0, key_press, root);
-	mlx_hook(root->mlx_win, 3, 1L << 1, key_release, root);
-	mlx_hook(root->mlx_win, 17, 1L << 17, destroy_hook, root);
+	mlx_hook(root->mlx_win, 2, 1L << 0, handle_key_press, root);
+	mlx_hook(root->mlx_win, 3, 1L << 1, handle_key_release, root);
+	mlx_hook(root->mlx_win, 17, 1L << 17, handle_destroy_hook, root);
 	mlx_loop(root->mlx);
 	return (0);
 }
