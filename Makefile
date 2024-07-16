@@ -1,6 +1,6 @@
 NAME		=	so_long
 CC			=	gcc
-FLAGS		=	-Wall -Wextra -Werror
+FLAGS		=	-Wall -Wextra -Werror -g3 -fsanitize=address,undefined
 MLX_DIR		=	mlx
 LFT			=	libft/libft.a
 INC			=	-I ./inc -I ./libft -I ./mlx
