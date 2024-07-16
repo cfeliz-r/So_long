@@ -57,7 +57,7 @@ void	update(t_root *root)
 		move_right(root, x, y);
 	had_move(root, x, y);
 	iscollectable(root);
-	draw(root);
+	render_frame(root);
 	if (root->game->exit.x == root->game->player.x
 		&& root->game->exit.y == root->game->player.y)
 		if (root->game->count_coll == root->game->player_coll)

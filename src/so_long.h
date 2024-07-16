@@ -56,8 +56,8 @@ typedef struct s_root
 	t_img			*ground;
 }				t_root;
 
-void			die(char *errmsg, int errnum);
-void			draw(t_root *root);
+void			exit_with_error(char *errmsg, int errnum);
+void			render_frame(t_root *root);
 int				key_press(int keycode, t_root *root);
 int				key_release(int keycode, t_root *root);
 int				destroy_hook(int keycode, t_root *root);

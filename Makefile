@@ -1,3 +1,15 @@
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    Makefile                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: cfeliz-r <cfeliz-r@student.your42network.  +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2024/07/17 01:02:12 by cfeliz-r          #+#    #+#              #
+#    Updated: 2024/07/17 01:02:24 by cfeliz-r         ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
+
 NAME		=	so_long
 CC			=	gcc
 FLAGS		=	-Wall -Wextra -Werror -g3 -fsanitize=address,undefined
@@ -6,8 +18,8 @@ LFT			=	libft/libft.a
 INC			=	-I ./inc -I ./libft -I ./mlx
 LIB			=	-L ./libft -lft -L ./mlx -lmlx -lXext -lX11 -lm -lbsd
 
-SRC			=	src/die.c \
-				src/draw.c \
+SRC			=	src/handle_error.c \
+				src/draw_and_render.c \
 				src/event.c \
 				src/game_destroy.c \
 				src/game_init.c \
@@ -24,7 +36,6 @@ SRC			=	src/die.c \
 				src/so_long.c \
 				src/update.c
 
-# Convertir la lista de archivos fuente en archivos objeto
 OBJ			=	$(SRC:src/%.c=obj/%.o)
 
 all:		$(MLX_DIR)/libmlx.a $(LFT) obj $(NAME)
@@ -62,4 +73,3 @@ fclean:		clean
 re:			fclean all
 
 .PHONY:		all clean fclean re
-

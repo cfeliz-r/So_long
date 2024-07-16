@@ -36,5 +36,5 @@ void	root_destroy(t_root *root, char *errmsg, int errnum)
 			game_destroy(root->game);
 		free(root);
 	}
-	die(errmsg, errnum);
+	exit_with_error(errmsg, errnum);
 }

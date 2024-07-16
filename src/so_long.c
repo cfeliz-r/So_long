@@ -31,11 +31,11 @@ int	main(int ac, char *av[])
 	t_root			*root;
 
 	if (ac != 2)
-		die("invalid number of arguments", 0);
+		exit_with_error("invalid number of arguments", 0);
 	if (isber(av[1]) == 0)
-		die("invalid argument (<name>.ber)", 0);
+		exit_with_error("invalid argument (<name>.ber)", 0);
 	root = root_init(av[1]);
-	draw(root);
+	render_frame(root);
 	mlx_hook(root->mlx_win, 2, 1L << 0, key_press, root);
 	mlx_hook(root->mlx_win, 3, 1L << 1, key_release, root);
 	mlx_hook(root->mlx_win, 17, 1L << 17, destroy_hook, root);
