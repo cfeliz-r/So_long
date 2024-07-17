@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   game_init.c                                        :+:      :+:    :+:   */
+/*   initialize_game.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cfeliz-r <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -12,11 +12,11 @@
 
 #include "so_long.h"
 
-void	game_init(t_root *root, char *filename)
+void	initialize_game(t_root *root, char *filename)
 {
 	root->game = (t_game *)malloc(sizeof(t_game));
 	if (root->game == 0)
-		root_destroy(root, "game_init(): malloc()", errno);
+		root_destroy(root, "initialize_game(): malloc()", errno);
 	root->game->map = 0;
 	root->game->coll = 0;
 	root->game->count_coll = 0;

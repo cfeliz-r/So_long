@@ -1,35 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   map_height.c                                       :+:      :+:    :+:   */
+/*   game_destroy.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cfeliz-r <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/07/16 17:04:51 by cfeliz-r          #+#    #+#             */
-/*   Updated: 2024/07/16 17:04:53 by cfeliz-r         ###   ########.fr       */
+/*   Created: 2024/07/16 17:04:05 by cfeliz-r          #+#    #+#             */
+/*   Updated: 2024/07/16 17:04:06 by cfeliz-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-void	map_height(t_root *root, char *file)
+void	free_game_resources(t_game *game)
 {
 	int				i;
-	int				j;
 
-	root->game->height = 1;
-	i = root->game->width + 1;
-	while (file[i] != 0)
+	if (game != 0)
 	{
-		j = 0;
-		while (file[i + j] != 0 && file[i + j] != '\n')
-			j++;
-		if (root->game->width != j)
+		if (game->coll != 0)
+			free(game->coll);
+		if (game->map != 0)
 		{
-			free(file);
-			root_destroy(root, "map format is invalid", 0);
+			i = 0;
+			while (i < game->height)
+				free(game->map[i++]);
+			free(game->map);
 		}
-		i += root->game->width + 1;
-		root->game->height++;
+		free(game);
 	}
 }

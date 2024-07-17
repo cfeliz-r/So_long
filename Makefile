@@ -21,9 +21,9 @@ LIB			=	-L ./libft -lft -L ./mlx -lmlx -lXext -lX11 -lm -lbsd
 SRC			=	src/handle_error.c \
 				src/draw_and_render.c \
 				src/handle_key_event.c \
-				src/game_destroy.c \
-				src/game_init.c \
-				src/map_height.c \
+				src/free_game_resources.c \
+				src/initialize_game.c \
+				src/calculate_map_height.c \
 				src/map_init.c \
 				src/map_isvalid.c \
 				src/map_parsing.c \

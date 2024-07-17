@@ -64,7 +64,7 @@ t_root	*root_init(char *filename)
 	root->coll = 0;
 	root->wall = 0;
 	root->ground = 0;
-	game_init(root, filename);
+	initialize_game(root, filename);
 	renderer_init(root);
 	texture_init(root);
 	return (root);

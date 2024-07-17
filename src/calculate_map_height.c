@@ -1,32 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   game_destroy.c                                     :+:      :+:    :+:   */
+/*   map_height.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cfeliz-r <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/07/16 17:04:05 by cfeliz-r          #+#    #+#             */
-/*   Updated: 2024/07/16 17:04:06 by cfeliz-r         ###   ########.fr       */
+/*   Created: 2024/07/16 17:04:51 by cfeliz-r          #+#    #+#             */
+/*   Updated: 2024/07/16 17:04:53 by cfeliz-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-void	game_destroy(t_game *game)
+void	calculate_map_height(t_root *root, char *file)
 {
 	int				i;
+	int				j;
 
-	if (game != 0)
+	root->game->height = 1;
+	i = root->game->width + 1;
+	while (file[i] != 0)
 	{
-		if (game->coll != 0)
-			free(game->coll);
-		if (game->map != 0)
+		j = 0;
+		while (file[i + j] != 0 && file[i + j] != '\n')
+			j++;
+		if (root->game->width != j)
 		{
-			i = 0;
-			while (i < game->height)
-				free(game->map[i++]);
-			free(game->map);
+			free(file);
+			root_destroy(root, "map format is invalid", 0);
 		}
-		free(game);
+		i += root->game->width + 1;
+		root->game->height++;
 	}
 }

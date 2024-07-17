@@ -12,7 +12,7 @@
 
 #include "so_long.h"
 
-void	root_destroy(t_root *root, char *errmsg, int errnum)
+void	root_destroy(t_root *root, char *error_msg, int error_num)
 {
 	if (root != 0)
 	{
@@ -33,8 +33,8 @@ void	root_destroy(t_root *root, char *errmsg, int errnum)
 		if (root->mlx != 0)
 			mlx_destroy_display(root->mlx);
 		if (root->game != 0)
-			game_destroy(root->game);
+			free_game_resources(root->game);
 		free(root);
 	}
-	exit_with_error(errmsg, errnum);
+	exit_with_error(error_msg, error_num);
 }
