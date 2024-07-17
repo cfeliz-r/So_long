@@ -12,7 +12,7 @@
 
 #include "so_long.h"
 
-int	handle_key_press(int keycode, t_root *root)
+int	handle_key_press(int keycode, t_game_root *root)
 {
 	if (keycode == 65307)
 		root_destroy(root, 0, 0);
@@ -28,7 +28,7 @@ int	handle_key_press(int keycode, t_root *root)
 	return (0);
 }
 
-int	handle_key_release(int keycode, t_root *root)
+int	handle_key_release(int keycode, t_game_root *root)
 {
 	if (keycode == 119)
 		root->game->player_up = 0;
@@ -42,7 +42,7 @@ int	handle_key_release(int keycode, t_root *root)
 	return (0);
 }
 
-int	handle_destroy_hook(int keycode, t_root *root)
+int	handle_destroy_hook(int keycode, t_game_root *root)
 {
 	(void)keycode;
 	(void)root;

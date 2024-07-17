@@ -28,7 +28,7 @@ int	isber(char *file)
 
 int	main(int ac, char *av[])
 {
-	t_root			*root;
+	t_game_root			*root;
 
 	if (ac != 2)
 		exit_with_error("invalid number of arguments", 0);
@@ -36,9 +36,9 @@ int	main(int ac, char *av[])
 		exit_with_error("invalid argument (<name>.ber)", 0);
 	root = root_init(av[1]);
 	render_frame(root);
-	mlx_hook(root->mlx_win, 2, 1L << 0, handle_key_press, root);
-	mlx_hook(root->mlx_win, 3, 1L << 1, handle_key_release, root);
-	mlx_hook(root->mlx_win, 17, 1L << 17, handle_destroy_hook, root);
-	mlx_loop(root->mlx);
+	mlx_hook(root->mlx_window, 2, 1L << 0, handle_key_press, root);
+	mlx_hook(root->mlx_window, 3, 1L << 1, handle_key_release, root);
+	mlx_hook(root->mlx_window, 17, 1L << 17, handle_destroy_hook, root);
+	mlx_loop(root->mlx_instance);
 	return (0);
 }

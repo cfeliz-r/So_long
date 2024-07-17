@@ -12,26 +12,26 @@
 
 #include "so_long.h"
 
-void	root_destroy(t_root *root, char *error_msg, int error_num)
+void	root_destroy(t_game_root *root, char *error_msg, int error_num)
 {
 	if (root != 0)
 	{
 		if (root->ground != 0)
-			mlx_destroy_image(root->mlx, root->ground);
+			mlx_destroy_image(root->mlx_instance, root->ground);
 		if (root->wall != 0)
-			mlx_destroy_image(root->mlx, root->wall);
-		if (root->coll != 0)
-			mlx_destroy_image(root->mlx, root->coll);
+			mlx_destroy_image(root->mlx_instance, root->wall);
+		if (root->collectible_image != 0)
+			mlx_destroy_image(root->mlx_instance, root->collectible_image);
 		if (root->exit_image != 0)
-			mlx_destroy_image(root->mlx, root->exit_image);
+			mlx_destroy_image(root->mlx_instance, root->exit_image);
 		if (root->player != 0)
-			mlx_destroy_image(root->mlx, root->player);
+			mlx_destroy_image(root->mlx_instance, root->player);
 		if (root->mlx_img != 0)
-			mlx_destroy_image(root->mlx, root->mlx_img);
-		if (root->mlx_win != 0)
-			mlx_destroy_window(root->mlx, root->mlx_win);
-		if (root->mlx != 0)
-			mlx_destroy_display(root->mlx);
+			mlx_destroy_image(root->mlx_instance, root->mlx_img);
+		if (root->mlx_window != 0)
+			mlx_destroy_window(root->mlx_instance, root->mlx_window);
+		if (root->mlx_instance != 0)
+			mlx_destroy_display(root->mlx_instance);
 		if (root->game != 0)
 			free_game_resources(root->game);
 		free(root);

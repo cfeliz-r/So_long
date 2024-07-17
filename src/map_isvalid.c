@@ -12,24 +12,24 @@
 
 #include "so_long.h"
 
-static int	isborder(t_root *root, int i)
+static int	isborder(t_game_root *root, int i)
 {
-	if (i < root->game->width
-		|| i > (root->game->width + 1) * (root->game->height - 1)
-		|| i % (root->game->width + 1) == 0
-		|| i % (root->game->width + 1) == root->game->width - 1)
+	if (i < root->game->map_width
+		|| i > (root->game->map_width + 1) * (root->game->map_height - 1)
+		|| i % (root->game->map_width + 1) == 0
+		|| i % (root->game->map_width + 1) == root->game->map_width - 1)
 		return (1);
 	return (0);
 }
 
-static void	isvalid(t_root *root, char *file, int i)
+static void	isvalid(t_game_root *root, char *file, int i)
 {
 	if (file[i] == 'P')
-		root->game->count_player++;
+		root->game->total_players++;
 	else if (file[i] == 'E')
-		root->game->count_exit++;
+		root->game->total_exits++;
 	else if (file[i] == 'C')
-		root->game->count_coll++;
+		root->game->total_collectibles++;
 	else if (file[i] == '1' || file[i] == '0')
 		return ;
 	else
@@ -39,7 +39,7 @@ static void	isvalid(t_root *root, char *file, int i)
 	}
 }
 
-void	map_isvalid(t_root *root, char *file)
+void	map_isvalid(t_game_root *root, char *file)
 {
 	int				i;
 
@@ -59,9 +59,9 @@ void	map_isvalid(t_root *root, char *file)
 		else
 			isvalid(root, file, i);
 	}
-	if (root->game->count_player != 1
-		|| root->game->count_exit != 1
-		|| root->game->count_coll < 1)
+	if (root->game->total_players != 1
+		|| root->game->total_exits != 1
+		|| root->game->total_collectibles < 1)
 	{
 		free(file);
 		root_destroy(root, "map configuration is invalid", 0);

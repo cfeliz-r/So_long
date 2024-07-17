@@ -12,18 +12,18 @@
 
 #include "so_long.h"
 
-void	initialize_game(t_root *root, char *filename)
+void	initialize_game(t_game_root *root, char *filename)
 {
-	root->game = (t_game *)malloc(sizeof(t_game));
+	root->game = (t_game_state *)malloc(sizeof(t_game_state));
 	if (root->game == 0)
 		root_destroy(root, "initialize_game(): malloc()", errno);
-	root->game->map = 0;
+	root->game->game_map = 0;
 	root->game->collectibles_positions = 0;
-	root->game->count_coll = 0;
-	root->game->count_exit = 0;
-	root->game->count_player = 0;
+	root->game->total_collectibles = 0;
+	root->game->total_exits = 0;
+	root->game->total_players = 0;
 	root->game->player_move = 0;
-	root->game->player_coll = 0;
+	root->game->player_collectible_count = 0;
 	root->game->player_up = 0;
 	root->game->player_down = 0;
 	root->game->player_left = 0;

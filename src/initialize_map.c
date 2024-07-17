@@ -12,7 +12,7 @@
 
 #include "so_long.h"
 
-static void	file_parse(t_root *root, char **file, char buf[], int fd)
+static void	file_parse(t_game_root *root, char **file, char buf[], int fd)
 {
 	char			*tmp;
 
@@ -26,7 +26,7 @@ static void	file_parse(t_root *root, char **file, char buf[], int fd)
 	}
 }
 
-static void	file_read(t_root *root, char **file, char buf[], int fd)
+static void	file_read(t_game_root *root, char **file, char buf[], int fd)
 {
 	int				ret;
 
@@ -48,7 +48,7 @@ static void	file_read(t_root *root, char **file, char buf[], int fd)
 	}
 }
 
-static char	*file_init(t_root *root, int fd)
+static char	*file_init(t_game_root *root, int fd)
 {
 	char			*file;
 
@@ -61,20 +61,20 @@ static char	*file_init(t_root *root, int fd)
 	return (file);
 }
 
-static void	read_map_file(t_root *root, char *file)
+static void	read_map_file(t_game_root *root, char *file)
 {
 	map_width(root, file);
 	calculate_map_height(root, file);
 	map_isvalid(root, file);
 	root->game->collectibles_positions
-		= (t_coordinates *)malloc(sizeof(t_coordinates) * root->game->count_coll);
+		= (t_coordinates *)malloc(sizeof(t_coordinates) * root->game->total_collectibles);
 	if (root->game->collectibles_positions == 0)
 	{
 		free(file);
 		root_destroy(root, "map_parsing(): malloc()", errno);
 	}
-	root->game->map = (int **)malloc(sizeof(int *) * root->game->height);
-	if (root->game->map == 0)
+	root->game->game_map = (int **)malloc(sizeof(int *) * root->game->map_height);
+	if (root->game->game_map == 0)
 	{
 		free(file);
 		root_destroy(root, "map_parsing(): malloc()", errno);
@@ -82,7 +82,7 @@ static void	read_map_file(t_root *root, char *file)
 	map_parsing(root, file);
 }
 
-void	initialize_map(t_root *root, char *filename)
+void	initialize_map(t_game_root *root, char *filename)
 {
 	int				fd;
 	char			*file;

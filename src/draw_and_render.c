@@ -12,7 +12,7 @@
 
 #include "so_long.h"
 
-static void	draw_image_square(t_root *root, t_img *img, int x, int y)
+static void	draw_image_square(t_game_root *root, t_img *img, int x, int y)
 {
 	unsigned int	color;
 	int				i;
@@ -33,32 +33,32 @@ static void	draw_image_square(t_root *root, t_img *img, int x, int y)
 	}
 }
 
-static void	draw_environment_objects(t_root *root, int i, int j)
+static void	draw_environment_objects(t_game_root *root, int i, int j)
 {
 	int				k;
 
 	if (root->game->exit_position.x == i && root->game->exit_position.y == j)
 		draw_image_square(root, root->exit_image, i * 40, j * 40);
 	k = -1;
-	while (++k < root->game->count_coll)
+	while (++k < root->game->total_collectibles)
 		if (root->game->collectibles_positions[k].x == i && root->game->collectibles_positions[k].y == j)
-			draw_image_square(root, root->coll, i * 40, j * 40);
-	if (root->game->player.x == i && root->game->player.y == j)
+			draw_image_square(root, root->collectible_image, i * 40, j * 40);
+	if (root->game->player_position.x == i && root->game->player_position.y == j)
 		draw_image_square(root, root->player, i * 40, j * 40);
 }
 
-static void	render_game_map(t_root *root)
+static void	render_game_map(t_game_root *root)
 {
 	int				i;
 	int				j;
 
 	j = 0;
-	while (j < root->game->height)
+	while (j < root->game->map_height)
 	{
 		i = 0;
-		while (i < root->game->width)
+		while (i < root->game->map_width)
 		{
-			if (root->game->map[j][i] == 1)
+			if (root->game->game_map[j][i] == 1)
 				draw_image_square(root, root->wall, i * 40, j * 40);
 			else
 				draw_image_square(root, root->ground, i * 40, j * 40);
@@ -69,8 +69,8 @@ static void	render_game_map(t_root *root)
 	}
 }
 
-void	render_frame(t_root *root)
+void	render_frame(t_game_root *root)
 {
 	render_game_map(root);
-	mlx_put_image_to_window(root->mlx, root->mlx_win, root->mlx_img, 0, 0);
+	mlx_put_image_to_window(root->mlx_instance, root->mlx_window, root->mlx_img, 0, 0);
 }

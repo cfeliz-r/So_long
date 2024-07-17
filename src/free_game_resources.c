@@ -12,7 +12,7 @@
 
 #include "so_long.h"
 
-void	free_game_resources(t_game *game)
+void	free_game_resources(t_game_state *game)
 {
 	int				i;
 
@@ -20,12 +20,12 @@ void	free_game_resources(t_game *game)
 	{
 		if (game->collectibles_positions != 0)
 			free(game->collectibles_positions);
-		if (game->map != 0)
+		if (game->game_map != 0)
 		{
 			i = 0;
-			while (i < game->height)
-				free(game->map[i++]);
-			free(game->map);
+			while (i < game->map_height)
+				free(game->game_map[i++]);
+			free(game->game_map);
 		}
 		free(game);
 	}
