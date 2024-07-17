@@ -25,7 +25,7 @@ static void	free_matrix(t_root *root, char *file, int **m, int size)
 	root_destroy(root, "map_parsing(): malloc()", errno);
 }
 
-static void	get_coord(t_root *root, char *file, int k, int *obj)
+static void	get_coordinates(t_root *root, char *file, int k, int *obj)
 {
 	if (file[k] == 'P')
 	{
@@ -35,14 +35,14 @@ static void	get_coord(t_root *root, char *file, int k, int *obj)
 	}
 	else if (file[k] == 'E')
 	{
-		root->game->exit.x = k % (root->game->width + 1);
-		root->game->exit.y = k / (root->game->width + 1);
+		root->game->exit_position.x = k % (root->game->width + 1);
+		root->game->exit_position.y = k / (root->game->width + 1);
 		file[k] = '0';
 	}
 	else if (file[k] == 'C')
 	{
-		root->game->coll[*obj].x = k % (root->game->width + 1);
-		root->game->coll[*obj].y = k / (root->game->width + 1);
+		root->game->collectibles_positions[*obj].x = k % (root->game->width + 1);
+		root->game->collectibles_positions[*obj].y = k / (root->game->width + 1);
 		file[k] = '0';
 		(*obj)++;
 	}
@@ -66,7 +66,7 @@ void	map_parsing(t_root *root, char *file)
 		i = 0;
 		while (i < root->game->width)
 		{
-			get_coord(root, file, k, &obj);
+			get_coordinates(root, file, k, &obj);
 			root->game->map[j][i++] = file[k++] - 48;
 		}
 		k++;

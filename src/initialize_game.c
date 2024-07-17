@@ -18,7 +18,7 @@ void	initialize_game(t_root *root, char *filename)
 	if (root->game == 0)
 		root_destroy(root, "initialize_game(): malloc()", errno);
 	root->game->map = 0;
-	root->game->coll = 0;
+	root->game->collectibles_positions = 0;
 	root->game->count_coll = 0;
 	root->game->count_exit = 0;
 	root->game->count_player = 0;
@@ -28,5 +28,5 @@ void	initialize_game(t_root *root, char *filename)
 	root->game->player_down = 0;
 	root->game->player_left = 0;
 	root->game->player_right = 0;
-	map_init(root, filename);
+	initialize_map(root, filename);
 }

@@ -18,8 +18,8 @@ void	free_game_resources(t_game *game)
 
 	if (game != 0)
 	{
-		if (game->coll != 0)
-			free(game->coll);
+		if (game->collectibles_positions != 0)
+			free(game->collectibles_positions);
 		if (game->map != 0)
 		{
 			i = 0;

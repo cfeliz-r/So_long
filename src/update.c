@@ -29,11 +29,11 @@ static void	iscollectable(t_root *root)
 	k = 0;
 	while (k < root->game->count_coll)
 	{
-		if (root->game->coll[k].x == root->game->player.x
-			&& root->game->coll[k].y == root->game->player.y)
+		if (root->game->collectibles_positions[k].x == root->game->player.x
+			&& root->game->collectibles_positions[k].y == root->game->player.y)
 		{
-			root->game->coll[k].x = -1;
-			root->game->coll[k].y = -1;
+			root->game->collectibles_positions[k].x = -1;
+			root->game->collectibles_positions[k].y = -1;
 			root->game->player_coll++;
 		}
 		k++;
@@ -58,8 +58,8 @@ void	update(t_root *root)
 	had_move(root, x, y);
 	iscollectable(root);
 	render_frame(root);
-	if (root->game->exit.x == root->game->player.x
-		&& root->game->exit.y == root->game->player.y)
+	if (root->game->exit_position.x == root->game->player.x
+		&& root->game->exit_position.y == root->game->player.y)
 		if (root->game->count_coll == root->game->player_coll)
 			root_destroy(root, 0, 0);
 }

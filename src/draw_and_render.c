@@ -37,11 +37,11 @@ static void	draw_environment_objects(t_root *root, int i, int j)
 {
 	int				k;
 
-	if (root->game->exit.x == i && root->game->exit.y == j)
-		draw_image_square(root, root->exit, i * 40, j * 40);
+	if (root->game->exit_position.x == i && root->game->exit_position.y == j)
+		draw_image_square(root, root->exit_image, i * 40, j * 40);
 	k = -1;
 	while (++k < root->game->count_coll)
-		if (root->game->coll[k].x == i && root->game->coll[k].y == j)
+		if (root->game->collectibles_positions[k].x == i && root->game->collectibles_positions[k].y == j)
 			draw_image_square(root, root->coll, i * 40, j * 40);
 	if (root->game->player.x == i && root->game->player.y == j)
 		draw_image_square(root, root->player, i * 40, j * 40);

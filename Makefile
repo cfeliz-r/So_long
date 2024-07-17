@@ -24,13 +24,12 @@ SRC			=	src/handle_error.c \
 				src/free_game_resources.c \
 				src/initialize_game.c \
 				src/calculate_map_height.c \
-				src/map_init.c \
+				src/initialize_map.c \
 				src/map_isvalid.c \
 				src/map_parsing.c \
-				src/map_read.c \
 				src/map_width.c \
 				src/mlx_utils.c \
-				src/move_player.c \
+				src/movements_player.c \
 				src/root_destroy.c \
 				src/root_init.c \
 				src/so_long.c \

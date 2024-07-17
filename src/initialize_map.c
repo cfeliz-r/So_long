@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   map_init.c                                         :+:      :+:    :+:   */
+/*   initialize_map.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cfeliz-r <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/16 17:05:03 by cfeliz-r          #+#    #+#             */
-/*   Updated: 2024/07/16 17:05:05 by cfeliz-r         ###   ########.fr       */
+/*   Updated: 2024/07/17 13:02:37 by cfeliz-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ static void	file_parse(t_root *root, char **file, char buf[], int fd)
 	if (*file == 0)
 	{
 		close(fd);
-		root_destroy(root, "map_init(): ft_strjoin()", errno);
+		root_destroy(root, "initialize_map(): ft_strjoin()", errno);
 	}
 }
 
@@ -38,7 +38,7 @@ static void	file_read(t_root *root, char **file, char buf[], int fd)
 		{
 			free(*file);
 			close(fd);
-			root_destroy(root, "map_init(): read()", errno);
+			root_destroy(root, "initialize_map(): read()", errno);
 		}
 		else
 		{
@@ -56,12 +56,33 @@ static char	*file_init(t_root *root, int fd)
 	if (file == 0)
 	{
 		close(fd);
-		root_destroy(root, "map_init(): ft_calloc()", errno);
+		root_destroy(root, "initialize_map(): ft_calloc()", errno);
 	}
 	return (file);
 }
 
-void	map_init(t_root *root, char *filename)
+static void	read_map_file(t_root *root, char *file)
+{
+	map_width(root, file);
+	calculate_map_height(root, file);
+	map_isvalid(root, file);
+	root->game->collectibles_positions
+		= (t_coordinates *)malloc(sizeof(t_coordinates) * root->game->count_coll);
+	if (root->game->collectibles_positions == 0)
+	{
+		free(file);
+		root_destroy(root, "map_parsing(): malloc()", errno);
+	}
+	root->game->map = (int **)malloc(sizeof(int *) * root->game->height);
+	if (root->game->map == 0)
+	{
+		free(file);
+		root_destroy(root, "map_parsing(): malloc()", errno);
+	}
+	map_parsing(root, file);
+}
+
+void	initialize_map(t_root *root, char *filename)
 {
 	int				fd;
 	char			*file;
@@ -73,6 +94,6 @@ void	map_init(t_root *root, char *filename)
 	file = file_init(root, fd);
 	file_read(root, &file, buf, fd);
 	close(fd);
-	map_read(root, file);
+	read_map_file(root, file);
 	free(file);
 }
