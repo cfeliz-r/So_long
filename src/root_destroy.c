@@ -14,7 +14,7 @@
 
 void	root_destroy(t_game_root *root, char *error_msg, int error_num)
 {
-	if (root != 0)
+	if (root != NULL)
 	{
 		if (root->ground != 0)
 			mlx_destroy_image(root->mlx_instance, root->ground);
@@ -31,8 +31,12 @@ void	root_destroy(t_game_root *root, char *error_msg, int error_num)
 		if (root->mlx_window != 0)
 			mlx_destroy_window(root->mlx_instance, root->mlx_window);
 		if (root->mlx_instance != 0)
+		{
 			mlx_destroy_display(root->mlx_instance);
-		if (root->game != 0)
+			free(root->mlx_instance);
+			root->mlx_instance = 0;
+		}
+		if (root->game != NULL)
 			free_game_resources(root->game);
 		free(root);
 	}

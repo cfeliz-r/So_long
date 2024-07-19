@@ -6,7 +6,7 @@
 /*   By: cfeliz-r <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/16 17:05:23 by cfeliz-r          #+#    #+#             */
-/*   Updated: 2024/07/16 17:05:24 by cfeliz-r         ###   ########.fr       */
+/*   Updated: 2024/07/17 16:57:09 by cfeliz-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,8 +42,8 @@ static void	isvalid(t_game_root *root, char *file, int i)
 void	map_isvalid(t_game_root *root, char *file)
 {
 	int				i;
-
-	i = -1;
+	
+    i = -1;
 	while (file[++i] != 0)
 	{
 		if (file[i] == '\n')

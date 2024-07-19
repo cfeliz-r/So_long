@@ -18,7 +18,7 @@ static void	texture_load(t_game_root *root, t_img **img, char *path)
 	int				height;
 
 	*img = mlx_xpm_file_to_image(root->mlx_instance, path, &width, &height);
-	if (*img == 0)
+	if (*img == NULL)
 		root_destroy(0, "texture_init(): can't load texture", 0);
 	(*img)->width = width;
 	(*img)->height = height;
@@ -37,7 +37,7 @@ static void	renderer_init(t_game_root *root)
 {
 	root->mlx_instance = mlx_init();
 	if (root->mlx_instance == 0)
-		root_destroy(root, "mlx_init(): can't load mlx", 0);
+		root_destroy(root, "mlx_init(): can't load mlx", 0);	
 	root->mlx_window = mlx_new_window(root->mlx_instance, root->game->map_width * 40,
 			root->game->map_height * 40, "so_long");
 	if (root->mlx_window == 0)
@@ -48,12 +48,31 @@ static void	renderer_init(t_game_root *root)
 		root_destroy(root, "mlx_new_image(): can't create an image", 0);
 }
 
+static void	initialize_game(t_game_root *root, char *filename)
+{
+	root->game = (t_game_state *)malloc(sizeof(t_game_state));
+	if (root->game == NULL)
+		root_destroy(root, "initialize_game(): malloc()", errno);
+	root->game->game_map = 0;
+	root->game->collectibles_positions = 0;
+	root->game->total_collectibles = 0;
+	root->game->total_exits = 0;
+	root->game->total_players = 0;
+	root->game->player_move = 0;
+	root->game->player_collectible_count = 0;
+	root->game->player_up = 0;
+	root->game->player_down = 0;
+	root->game->player_left = 0;
+	root->game->player_right = 0;
+	initialize_map(root, filename);
+}
+
 t_game_root	*root_init(char *filename)
 {
 	t_game_root			*root;
 
 	root = (t_game_root *)malloc(sizeof(t_game_root));
-	if (root == 0)
+	if (root == NULL)
 		root_destroy(0, "root_init(): malloc()", errno);
 	root->game = 0;
 	root->mlx_instance = 0;

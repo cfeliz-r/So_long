@@ -61,7 +61,6 @@ int				handle_key_press(int keycode, t_game_root *root);
 int				handle_key_release(int keycode, t_game_root *root);
 int				handle_destroy_hook(int keycode, t_game_root *root);
 void			free_game_resources(t_game_state *game);
-void			initialize_game(t_game_root *root, char *filename);
 void			calculate_map_height(t_game_root *root, char *file);
 void			initialize_map(t_game_root *root, char *filename);
 void			map_isvalid(t_game_root *root, char *file);
@@ -78,5 +77,6 @@ void			root_destroy(t_game_root *root, char *errmsg, int errnum);
 t_game_root			*root_init(char *filename);
 void			update(t_game_root *root);
 void			exit_with_error(char *error_msg, int error_num);
+int				is_accessible(t_game_root *root);
 
 #endif

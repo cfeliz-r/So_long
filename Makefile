@@ -22,7 +22,6 @@ SRC			=	src/handle_error.c \
 				src/draw_and_render.c \
 				src/handle_key_event.c \
 				src/free_game_resources.c \
-				src/initialize_game.c \
 				src/calculate_map_height.c \
 				src/initialize_map.c \
 				src/map_isvalid.c \
@@ -33,6 +32,7 @@ SRC			=	src/handle_error.c \
 				src/root_destroy.c \
 				src/root_init.c \
 				src/so_long.c \
+				src/flood_fill.c \
 				src/update.c
 
 OBJ			=	$(SRC:src/%.c=obj/%.o)
