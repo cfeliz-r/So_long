@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   flood_fill.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cfeliz-r <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: cfeliz-r <cfeliz-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/19 13:20:32 by cfeliz-r          #+#    #+#             */
-/*   Updated: 2024/07/20 15:27:16 by cfeliz-r         ###   ########.fr       */
+/*   Updated: 2024/07/20 18:19:40 by cfeliz-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,8 @@ static char	**duplicate_map(t_game_root *root)
 	int		j;
 
 	i = 0;
-	dup = malloc(sizeof(char *) * root->game->map_height);
+	dup = malloc(sizeof(char *) * root->game->map_height
+			* root->game->map_width);
 	if (!dup)
 		return (NULL);
 	while (i < root->game->map_height)
@@ -86,9 +87,8 @@ int	is_accessible(t_game_root *root)
 
 	size.x = root->game->map_width;
 	size.y = root->game->map_height;
-	start.x = 1;
-	start.y = 1;
 	map_copy = duplicate_map(root);
+	start = find_starting_position(map_copy, size);
 	flood_fill(map_copy, size, start);
 	if (map_copy[root->game->exit_position.y]
 		[root->game->exit_position.x] != 'F')

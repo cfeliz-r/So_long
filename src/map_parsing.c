@@ -75,3 +75,30 @@ void	map_parsing(t_game_root *root, char *file)
 		k++;
 	}
 }
+
+t_coordinates	find_starting_position(char **map, t_coordinates size)
+{
+	t_coordinates	pos;
+	int				row;
+	int				col;
+
+	pos.y = -1;
+	pos.x = -1;
+	row = 0;
+	while (row < size.x)
+	{
+		col = 0;
+		while (col < size.x)
+		{
+			if (map[row][col] == 0)
+			{
+				pos.y = row;
+				pos.x = col;
+				return (pos);
+			}
+			col++;
+		}
+		row++;
+	}
+	return (pos);
+}

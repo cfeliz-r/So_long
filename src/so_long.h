@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   so_long.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cfeliz-r <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: cfeliz-r <cfeliz-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/16 16:39:13 by cfeliz-r          #+#    #+#             */
-/*   Updated: 2024/07/16 19:53:40 by cfeliz-r         ###   ########.fr       */
+/*   Updated: 2024/07/20 18:18:32 by cfeliz-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,5 +78,6 @@ t_game_root		*root_init(char *filename);
 void			update(t_game_root *root);
 void			exit_with_error(char *error_msg, int error_num);
 int				is_accessible(t_game_root *root);
+t_coordinates	find_starting_position(char **map, t_coordinates size);
 
 #endif

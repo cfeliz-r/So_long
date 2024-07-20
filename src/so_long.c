@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   so_long.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cfeliz-r <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: cfeliz-r <cfeliz-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/16 17:07:15 by cfeliz-r          #+#    #+#             */
-/*   Updated: 2024/07/20 15:59:34 by cfeliz-r         ###   ########.fr       */
+/*   Updated: 2024/07/20 18:22:56 by cfeliz-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ int	main(int ac, char *av[])
 		exit_with_error("invalid argument (<name>.ber)", 0);
 	root = root_init(av[1]);
 	if (!is_accessible(root))
-		root_destroy(root, "Error: Some objects are not accessible", 0);
+		root_destroy(root, "Some objects are not accessible", 0);
 	render_frame(root);
 	mlx_hook(root->mlx_window, 2, 1L << 0, handle_key_press, root);
 	mlx_hook(root->mlx_window, 3, 1L << 1, handle_key_release, root);
