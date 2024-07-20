@@ -14,22 +14,27 @@
 
 void	calculate_map_height(t_game_root *root, char *file)
 {
-	int				i;
-	int				j;
-
+	int	i;
+	int	line_length;
+    
+	i = 0;
 	root->game->map_height = 1;
-	i = root->game->map_width + 1;
-	while (file[i] != 0)
+    while (file[i] != '\0')
 	{
-		j = 0;
-		while (file[i + j] != 0 && file[i + j] != '\n')
-			j++;
-		if (root->game->map_width != j)
+		line_length = 0;
+		while (file[i] != '\0' && file[i] != '\n')
 		{
-			free(file);
-			root_destroy(root, "map format is invalid", 0);
+            line_length++;
+            i++;
+        }
+        if (line_length != root->game->map_width) {
+            free(file);
+            root_destroy(root, "map format is invalid", 0);
+            return ;
+        }
+        if (file[i] == '\n')
+            i++;
+        if (file[i] != '\0')
+			root->game->map_height++;
 		}
-		i += root->game->map_width + 1;
-		root->game->map_height++;
-	}
 }

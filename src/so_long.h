@@ -74,7 +74,7 @@ void			move_down(t_game_root *root, int x, int y);
 void			move_left(t_game_root *root, int x, int y);
 void			move_right(t_game_root *root, int x, int y);
 void			root_destroy(t_game_root *root, char *errmsg, int errnum);
-t_game_root			*root_init(char *filename);
+t_game_root		*root_init(char *filename);
 void			update(t_game_root *root);
 void			exit_with_error(char *error_msg, int error_num);
 int				is_accessible(t_game_root *root);

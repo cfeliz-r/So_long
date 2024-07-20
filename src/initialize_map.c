@@ -12,11 +12,17 @@
 
 #include "so_long.h"
 
-static void	file_parse(t_game_root *root, char **file, char buf[], int fd)
+static void	file_parse(t_game_root *root, char **file, char *buf, int fd)
 {
 	char			*tmp;
 
 	tmp = ft_strjoin(*file, buf);
+	if(!tmp)
+	{
+		free(*file);
+		close(fd);
+		root_destroy(root, "initialize_map(): ft_strjoin()", errno);
+	}
 	free(*file);
 	*file = tmp;
 	if (*file == 0)
@@ -42,7 +48,7 @@ static void	file_read(t_game_root *root, char **file, char buf[], int fd)
 		}
 		else
 		{
-			buf[ret] = 0;
+			buf[ret] = '\0';
 			file_parse(root, file, buf, fd);
 		}
 	}
@@ -53,7 +59,7 @@ static char	*file_init(t_game_root *root, int fd)
 	char			*file;
 
 	file = ft_calloc(1, 1);
-	if (file == 0)
+	if (!file)
 	{
 		close(fd);
 		root_destroy(root, "initialize_map(): ft_calloc()", errno);
@@ -86,7 +92,7 @@ void	initialize_map(t_game_root *root, char *filename)
 {
 	int				fd;
 	char			*file;
-	char			buf[1024 + 1];
+	char			buf[1025];
 
 	fd = open(filename, O_RDONLY);
 	if (fd == -1)

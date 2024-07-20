@@ -28,7 +28,7 @@ static void	fill(char **tab, t_coordinates size, char target, int row, int col)
 
 static void flood_fill(char **tab, t_coordinates size, t_coordinates begin)
 {
-    char    target;
+   char     target;
 
     target = tab[begin.y][begin.x];
     fill(tab, size, target, begin.y, begin.x);
@@ -57,7 +57,7 @@ static char **duplicate_map(t_game_root *root)
         j = 0;
         while (j < root->game->map_width)
         {
-            dup[i][j] = root->game->game_map[i][j] + '0';
+            dup[i][j] = root->game->game_map[i][j];
             j++;
         }
         dup[i++][root->game->map_width] = '\0';
@@ -76,33 +76,29 @@ static void free_map_duplicate(char **map, int height)
 
 int is_accessible(t_game_root *root)
 {
-    char    **map_copy;
-    int     i;
+    char **map_copy;
+    int i;
+    t_coordinates size;
+    t_coordinates start;
 
+    size.x = root->game->map_width;
+    size.y = root->game->map_height;
+    start.x = 1;
+    start.y = 1;
     map_copy = duplicate_map(root);
-    t_coordinates size = {root->game->map_width, root->game->map_height};
-    t_coordinates start = {root->game->player_position.y, root->game->player_position.x};
     flood_fill(map_copy, size, start);
     if (map_copy[root->game->exit_position.y][root->game->exit_position.x] != 'F')
-    {
-        free_map_duplicate(map_copy, root->game->map_height);
-        return (0);
-    }
+        return (ft_printf("the exit is block!"),free_map_duplicate(map_copy, size.y), 0);
     i = 0;
     while (i < root->game->total_collectibles)
     {
-        if (map_copy[root->game->collectibles_positions[i].y][root->game->collectibles_positions[i].x] != 'F')
-        {
-            free_map_duplicate(map_copy, root->game->map_height);
-            return(0);
-        }
+        if (map_copy[root->game->collectibles_positions[i].y][root->game->collectibles_positions[i].x] != 'F') 
+            return (ft_printf("collectible block!"),free_map_duplicate(map_copy, size.y), 0);
         i++;
     }
     if (map_copy[root->game->player_position.y][root->game->player_position.x] != 'F')
-    {
-        free_map_duplicate(map_copy, root->game->map_height);
-        return (0);
-    }
-    free_map_duplicate(map_copy, root->game->map_height);
+        return (ft_printf("the player is block!"),free_map_duplicate(map_copy, size.y), 0);
+
+    free_map_duplicate(map_copy, size.y);
     return (1);
 }
