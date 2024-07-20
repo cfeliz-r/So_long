@@ -6,7 +6,7 @@
 /*   By: cfeliz-r <cfeliz-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/16 16:39:13 by cfeliz-r          #+#    #+#             */
-/*   Updated: 2024/07/20 18:18:32 by cfeliz-r         ###   ########.fr       */
+/*   Updated: 2024/07/20 19:10:26 by cfeliz-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,6 @@ void			calculate_map_height(t_game_root *root, char *file);
 void			initialize_map(t_game_root *root, char *filename);
 void			map_isvalid(t_game_root *root, char *file);
 void			map_parsing(t_game_root *root, char *file);
-void			map_width(t_game_root *root, char *file);
 unsigned int	mlx_get_pixel(t_img *img, int x, int y);
 void			mlx_draw_pixel(t_img *mlx_img, int x, int y, int color);
 unsigned int	mlx_rgb_to_int(int o, int r, int g, int b);

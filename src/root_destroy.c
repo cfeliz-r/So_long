@@ -47,3 +47,21 @@ void	root_destroy(t_game_root *root, char *error_msg, int error_num)
 	}
 	exit_with_error(error_msg, error_num);
 }
+
+void	exit_with_error(char *error_msg, int error_num)
+{
+	if (error_msg != 0 || error_num != 0)
+		ft_putendl_fd("Error", 2);
+	if (error_msg != 0)
+		ft_putstr_fd(error_msg, 2);
+	if (error_msg != 0 && error_num != 0)
+		ft_putstr_fd(": ", 2);
+	if (error_num != 0)
+		ft_putstr_fd(strerror(error_num), 2);
+	if (error_msg != 0 || error_num != 0)
+	{
+		ft_putendl_fd("", 2);
+		exit(1);
+	}
+	exit(0);
+}

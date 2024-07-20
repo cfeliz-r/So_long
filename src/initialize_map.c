@@ -6,65 +6,50 @@
 /*   By: cfeliz-r <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/16 17:05:03 by cfeliz-r          #+#    #+#             */
-/*   Updated: 2024/07/20 16:03:09 by cfeliz-r         ###   ########.fr       */
+/*   Updated: 2024/07/20 19:04:25 by cfeliz-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-static void	file_parse(t_game_root *root, char **file, char *buf, int fd)
+static void	process_line(t_game_root *root, char **file, char *line)
 {
-	char			*tmp;
+	char	*tmp;
 
-	tmp = ft_strjoin(*file, buf);
+	tmp = ft_strjoin(*file, line);
 	if (!tmp)
 	{
 		free(*file);
-		close(fd);
-		root_destroy(root, "initialize_map(): ft_strjoin()", errno);
+		free(line);
+		root_destroy(root, "process_line(): ft_strjoin()", errno);
 	}
 	free(*file);
 	*file = tmp;
+	free(line);
 	if (*file == 0)
-	{
-		close(fd);
-		root_destroy(root, "initialize_map(): ft_strjoin()", errno);
-	}
+		root_destroy(root, "process_line(): ft_strjoin()", errno);
 }
 
-static void	file_read(t_game_root *root, char **file, char buf[], int fd)
+static char	*file_init(t_game_root *root)
 {
-	int				ret;
+	char	*file;
 
-	ret = 1;
-	while (ret != 0)
-	{
-		ret = read(fd, buf, 1024);
-		if (ret == -1)
-		{
-			free(*file);
-			close(fd);
-			root_destroy(root, "initialize_map(): read()", errno);
-		}
-		else
-		{
-			buf[ret] = '\0';
-			file_parse(root, file, buf, fd);
-		}
-	}
-}
-
-static char	*file_init(t_game_root *root, int fd)
-{
-	char			*file;
-
-	file = ft_calloc(1, 1);
+	file = ft_calloc(1, sizeof(char));
 	if (!file)
-	{
-		close(fd);
-		root_destroy(root, "initialize_map(): ft_calloc()", errno);
-	}
+		root_destroy(root, "file_init(): ft_calloc()", errno);
 	return (file);
+}
+
+static void	map_width(t_game_root *root, char *file)
+{
+	root->game->map_width = 0;
+	while (file[root->game->map_width] && file[root->game->map_width] != '\n')
+		root->game->map_width++;
+	if (root->game->map_width == 0 || file[root->game->map_width] == 0)
+	{
+		free(file);
+		root_destroy(root, "map file is invalid", 0);
+	}
 }
 
 static void	read_map_file(t_game_root *root, char *file)
@@ -77,29 +62,34 @@ static void	read_map_file(t_game_root *root, char *file)
 	if (root->game->collectibles == 0)
 	{
 		free(file);
-		root_destroy(root, "map_parsing(): malloc()", errno);
+		root_destroy(root, "read_map_file(): malloc() collectibles", errno);
 	}
 	root->game->game_map = (int **)malloc(sizeof(int *)
 			* root->game->map_height);
 	if (root->game->game_map == 0)
 	{
 		free(file);
-		root_destroy(root, "map_parsing(): malloc()", errno);
+		root_destroy(root, "read_map_file(): malloc() game_map", errno);
 	}
 	map_parsing(root, file);
 }
 
 void	initialize_map(t_game_root *root, char *filename)
 {
-	int				fd;
-	char			*file;
-	char			buf[1025];
+	int		fd;
+	char	*file;
+	char	*line;
 
 	fd = open(filename, O_RDONLY);
 	if (fd == -1)
 		root_destroy(root, filename, errno);
-	file = file_init(root, fd);
-	file_read(root, &file, buf, fd);
+	file = file_init(root);
+	line = get_next_line(fd);
+	while (line)
+	{
+		process_line(root, &file, line);
+		line = get_next_line(fd);
+	}
 	close(fd);
 	read_map_file(root, file);
 	free(file);

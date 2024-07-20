@@ -67,3 +67,50 @@ void	map_isvalid(t_game_root *root, char *file)
 		root_destroy(root, "map configuration is invalid", 0);
 	}
 }
+
+void	calculate_map_height(t_game_root *root, char *file)
+{
+	int		i;
+	int		line_length;
+
+	i = 0;
+	root->game->map_height = 1;
+	while (file[i] != '\0')
+	{
+		line_length = 0;
+		while (file[i] != '\0' && file[i] != '\n')
+		{
+			line_length++;
+			i++;
+		}
+		if (line_length != root->game->map_width)
+		{
+			free(file);
+			root_destroy(root, "map format is invalid", 0);
+			return ;
+		}
+		if (file[i] == '\n')
+			i++;
+		if (file[i] != '\0')
+			root->game->map_height++;
+	}
+}
+
+void	free_game_resources(t_game_state *game)
+{
+	int				i;
+
+	if (game != 0)
+	{
+		if (game->collectibles != 0)
+			free(game->collectibles);
+		if (game->game_map != 0)
+		{
+			i = 0;
+			while (i < game->map_height)
+				free(game->game_map[i++]);
+			free(game->game_map);
+		}
+		free(game);
+	}
+}
