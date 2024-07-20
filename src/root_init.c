@@ -6,7 +6,7 @@
 /*   By: cfeliz-r <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/16 17:06:52 by cfeliz-r          #+#    #+#             */
-/*   Updated: 2024/07/16 19:52:25 by cfeliz-r         ###   ########.fr       */
+/*   Updated: 2024/07/20 16:07:20 by cfeliz-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,24 +26,24 @@ static void	texture_load(t_game_root *root, t_img **img, char *path)
 
 static void	texture_init(t_game_root *root)
 {
-	texture_load(root, &root->player, "./img/player.xpm");
-	texture_load(root, &root->exit_image, "./img/helicopter.xpm");
-	texture_load(root, &root->collectible_image, "./img/gas.xpm");
-	texture_load(root, &root->wall, "./img/wall.xpm");
-	texture_load(root, &root->ground, "./img/sand.xpm");
+	texture_load(root, &root->player, "./textures/player.xpm");
+	texture_load(root, &root->exit_image, "./textures/helicopter.xpm");
+	texture_load(root, &root->collectible_image, "./textures/gas.xpm");
+	texture_load(root, &root->wall, "./textures/wall.xpm");
+	texture_load(root, &root->ground, "./textures/sand.xpm");
 }
 
 static void	renderer_init(t_game_root *root)
 {
 	root->mlx_instance = mlx_init();
 	if (root->mlx_instance == 0)
-		root_destroy(root, "mlx_init(): can't load mlx", 0);	
-	root->mlx_window = mlx_new_window(root->mlx_instance, root->game->map_width * 40,
-			root->game->map_height * 40, "so_long");
+		root_destroy(root, "mlx_init(): can't load mlx", 0);
+	root->mlx_window = mlx_new_window(root->mlx_instance,
+			root->game->map_width * 40, root->game->map_height * 40, "so_long");
 	if (root->mlx_window == 0)
 		root_destroy(root, "mlx_new_window(): can't create a window", 0);
-	root->mlx_img = mlx_new_image(root->mlx_instance, root->game->map_width * 40,
-			root->game->map_height * 40);
+	root->mlx_img = mlx_new_image(root->mlx_instance,
+			root->game->map_width * 40, root->game->map_height * 40);
 	if (root->mlx_img == 0)
 		root_destroy(root, "mlx_new_image(): can't create an image", 0);
 }
@@ -54,7 +54,7 @@ static void	initialize_game(t_game_root *root, char *filename)
 	if (!root->game)
 		root_destroy(root, "initialize_game(): malloc()", errno);
 	root->game->game_map = 0;
-	root->game->collectibles_positions = 0;
+	root->game->collectibles = 0;
 	root->game->total_collectibles = 0;
 	root->game->total_exits = 0;
 	root->game->total_players = 0;

@@ -6,7 +6,7 @@
 /*   By: cfeliz-r <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/16 17:05:03 by cfeliz-r          #+#    #+#             */
-/*   Updated: 2024/07/17 13:02:37 by cfeliz-r         ###   ########.fr       */
+/*   Updated: 2024/07/20 16:03:09 by cfeliz-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ static void	file_parse(t_game_root *root, char **file, char *buf, int fd)
 	char			*tmp;
 
 	tmp = ft_strjoin(*file, buf);
-	if(!tmp)
+	if (!tmp)
 	{
 		free(*file);
 		close(fd);
@@ -72,14 +72,15 @@ static void	read_map_file(t_game_root *root, char *file)
 	map_width(root, file);
 	calculate_map_height(root, file);
 	map_isvalid(root, file);
-	root->game->collectibles_positions
-		= (t_coordinates *)malloc(sizeof(t_coordinates) * root->game->total_collectibles);
-	if (root->game->collectibles_positions == 0)
+	root->game->collectibles = (t_coordinates *)malloc(sizeof(t_coordinates)
+			* root->game->total_collectibles);
+	if (root->game->collectibles == 0)
 	{
 		free(file);
 		root_destroy(root, "map_parsing(): malloc()", errno);
 	}
-	root->game->game_map = (int **)malloc(sizeof(int *) * root->game->map_height);
+	root->game->game_map = (int **)malloc(sizeof(int *)
+			* root->game->map_height);
 	if (root->game->game_map == 0)
 	{
 		free(file);

@@ -6,11 +6,23 @@
 /*   By: cfeliz-r <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/16 17:06:41 by cfeliz-r          #+#    #+#             */
-/*   Updated: 2024/07/16 17:06:42 by cfeliz-r         ###   ########.fr       */
+/*   Updated: 2024/07/20 15:52:00 by cfeliz-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
+
+static void	root_continue_destroy(t_game_root *root)
+{
+	if (root->mlx_instance != 0)
+	{
+		mlx_destroy_display(root->mlx_instance);
+		free(root->mlx_instance);
+		root->mlx_instance = 0;
+	}
+	if (root->game != NULL)
+		free_game_resources(root->game);
+}
 
 void	root_destroy(t_game_root *root, char *error_msg, int error_num)
 {
@@ -30,14 +42,7 @@ void	root_destroy(t_game_root *root, char *error_msg, int error_num)
 			mlx_destroy_image(root->mlx_instance, root->mlx_img);
 		if (root->mlx_window != 0)
 			mlx_destroy_window(root->mlx_instance, root->mlx_window);
-		if (root->mlx_instance != 0)
-		{
-			mlx_destroy_display(root->mlx_instance);
-			free(root->mlx_instance);
-			root->mlx_instance = 0;
-		}
-		if (root->game != NULL)
-			free_game_resources(root->game);
+		root_continue_destroy(root);
 		free(root);
 	}
 	exit_with_error(error_msg, error_num);

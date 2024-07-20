@@ -6,7 +6,7 @@
 /*   By: cfeliz-r <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/16 17:07:27 by cfeliz-r          #+#    #+#             */
-/*   Updated: 2024/07/16 17:07:28 by cfeliz-r         ###   ########.fr       */
+/*   Updated: 2024/07/20 15:59:04 by cfeliz-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,8 @@
 
 static void	had_move(t_game_root *root, int x, int y)
 {
-	if (root->game->player_position.x != x || root->game->player_position.y != y)
+	if (root->game->player_position.x != x
+		|| root->game->player_position.y != y)
 	{
 		root->game->player_move++;
 		ft_putnbr_fd(root->game->player_move, 1);
@@ -29,11 +30,11 @@ static void	iscollectable(t_game_root *root)
 	k = 0;
 	while (k < root->game->total_collectibles)
 	{
-		if (root->game->collectibles_positions[k].x == root->game->player_position.x
-			&& root->game->collectibles_positions[k].y == root->game->player_position.y)
+		if (root->game->collectibles[k].x == root->game->player_position.x
+			&& root->game->collectibles[k].y == root->game->player_position.y)
 		{
-			root->game->collectibles_positions[k].x = -1;
-			root->game->collectibles_positions[k].y = -1;
+			root->game->collectibles[k].x = -1;
+			root->game->collectibles[k].y = -1;
 			root->game->player_collectible_count++;
 		}
 		k++;
@@ -60,6 +61,7 @@ void	update(t_game_root *root)
 	render_frame(root);
 	if (root->game->exit_position.x == root->game->player_position.x
 		&& root->game->exit_position.y == root->game->player_position.y)
-		if (root->game->total_collectibles == root->game->player_collectible_count)
+		if (root->game->total_collectibles
+			== root->game->player_collectible_count)
 			root_destroy(root, 0, 0);
 }

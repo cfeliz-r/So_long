@@ -6,7 +6,7 @@
 /*   By: cfeliz-r <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/16 17:05:33 by cfeliz-r          #+#    #+#             */
-/*   Updated: 2024/07/16 17:05:35 by cfeliz-r         ###   ########.fr       */
+/*   Updated: 2024/07/20 15:34:42 by cfeliz-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,8 +41,10 @@ static void	get_coordinates(t_game_root *root, char *file, int k, int *obj)
 	}
 	else if (file[k] == 'C')
 	{
-		root->game->collectibles_positions[*obj].x = k % (root->game->map_width + 1);
-		root->game->collectibles_positions[*obj].y = k / (root->game->map_width + 1);
+		root->game->collectibles[*obj].x = k
+			% (root->game->map_width + 1);
+		root->game->collectibles[*obj].y = k
+			/ (root->game->map_width + 1);
 		file[k] = '0';
 		(*obj)++;
 	}
@@ -60,7 +62,8 @@ void	map_parsing(t_game_root *root, char *file)
 	j = -1;
 	while (++j < root->game->map_height)
 	{
-		root->game->game_map[j] = (int *)malloc(sizeof(int) * root->game->map_width);
+		root->game->game_map[j] = (int *)malloc(sizeof(int)
+				* root->game->map_width);
 		if (root->game->game_map[j] == 0)
 			free_matrix(root, file, root->game->game_map, j);
 		i = 0;

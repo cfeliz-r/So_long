@@ -6,7 +6,7 @@
 /*   By: cfeliz-r <cfeliz-r@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/19 10:23:22 by cfeliz-r          #+#    #+#             */
-/*   Updated: 2024/06/24 17:23:43 by cfeliz-r         ###   ########.fr       */
+/*   Updated: 2024/07/20 16:04:12 by cfeliz-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ char	*ft_strjoin(char *s1, char *s2)
 	int		i;
 	int		j;
 	char	*str;
-	
+
 	if (!s1 || !s2)
 		return (NULL);
 	i = 0;

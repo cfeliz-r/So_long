@@ -6,7 +6,7 @@
 /*   By: cfeliz-r <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/16 17:03:45 by cfeliz-r          #+#    #+#             */
-/*   Updated: 2024/07/16 17:03:47 by cfeliz-r         ###   ########.fr       */
+/*   Updated: 2024/07/20 15:40:07 by cfeliz-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,9 +41,11 @@ static void	draw_environment_objects(t_game_root *root, int i, int j)
 		draw_image_square(root, root->exit_image, i * 40, j * 40);
 	k = -1;
 	while (++k < root->game->total_collectibles)
-		if (root->game->collectibles_positions[k].x == i && root->game->collectibles_positions[k].y == j)
+		if (root->game->collectibles[k].x == i
+			&& root->game->collectibles[k].y == j)
 			draw_image_square(root, root->collectible_image, i * 40, j * 40);
-	if (root->game->player_position.x == i && root->game->player_position.y == j)
+	if (root->game->player_position.x == i
+		&& root->game->player_position.y == j)
 		draw_image_square(root, root->player, i * 40, j * 40);
 }
 
@@ -72,5 +74,6 @@ static void	render_game_map(t_game_root *root)
 void	render_frame(t_game_root *root)
 {
 	render_game_map(root);
-	mlx_put_image_to_window(root->mlx_instance, root->mlx_window, root->mlx_img, 0, 0);
+	mlx_put_image_to_window(root->mlx_instance,
+		root->mlx_window, root->mlx_img, 0, 0);
 }

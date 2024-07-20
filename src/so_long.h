@@ -37,7 +37,7 @@ typedef struct s_game
 	int				player_move;
 	int				player_collectible_count;
 	t_coordinates	exit_position;
-	t_coordinates	*collectibles_positions;
+	t_coordinates	*collectibles;
 	int				total_collectibles;
 	int				total_exits;
 	int				total_players;

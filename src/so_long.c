@@ -6,7 +6,7 @@
 /*   By: cfeliz-r <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/16 17:07:15 by cfeliz-r          #+#    #+#             */
-/*   Updated: 2024/07/19 13:29:23 by cfeliz-r         ###   ########.fr       */
+/*   Updated: 2024/07/20 15:59:34 by cfeliz-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ int	main(int ac, char *av[])
 	if (isber(av[1]) == 0)
 		exit_with_error("invalid argument (<name>.ber)", 0);
 	root = root_init(av[1]);
-	if(!is_accessible(root))
+	if (!is_accessible(root))
 		root_destroy(root, "Error: Some objects are not accessible", 0);
 	render_frame(root);
 	mlx_hook(root->mlx_window, 2, 1L << 0, handle_key_press, root);
