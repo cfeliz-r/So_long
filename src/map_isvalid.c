@@ -12,6 +12,34 @@
 
 #include "so_long.h"
 
+/*
+static int isborder(t_game_root *root, int i) {
+    int line_length = root->game->map_width + 1; // +1 for the newline character
+
+    // First row
+    if (i < root->game->map_width) {
+        return (1);
+    }
+
+    // Last row
+    if (i >= (line_length) * (root->game->map_height - 1)) {
+        return (1);
+    }
+
+    // First column (excluding the newline character position)
+    if (i % line_length == 0) {
+        return (1);
+    }
+
+    // Last column (excluding the newline character position)
+    if ((i + 1) % line_length == root->game->map_width) {
+        return (1);
+    }
+
+    return (0);
+}
+
+ */
 static int	isborder(t_game_root *root, int i)
 {
 	if (i < root->game->map_width
@@ -50,8 +78,10 @@ void	map_isvalid(t_game_root *root, char *file)
 			continue ;
 		if (isborder(root, i))
 		{
+			printf("i: %d\n", i);
 			if (file[i] != '1')
 			{
+				printf("file[i]: %c\n", file[i]);
 				free(file);
 				root_destroy(root, "map isn't surrounded by walls", 0);
 			}
@@ -82,12 +112,6 @@ void	calculate_map_height(t_game_root *root, char *file)
 		{
 			line_length++;
 			i++;
-		}
-		if (line_length != root->game->map_width)
-		{
-			free(file);
-			root_destroy(root, "map format is invalid", 0);
-			return ;
 		}
 		if (file[i] == '\n')
 			i++;

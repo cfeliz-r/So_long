@@ -65,6 +65,7 @@ void			calculate_map_height(t_game_root *root, char *file);
 void			initialize_map(t_game_root *root, char *filename);
 void			map_isvalid(t_game_root *root, char *file);
 void			map_parsing(t_game_root *root, char *file);
+void			map_width(t_game_root *root, char *file);
 unsigned int	mlx_get_pixel(t_img *img, int x, int y);
 void			mlx_draw_pixel(t_img *mlx_img, int x, int y, int color);
 unsigned int	mlx_rgb_to_int(int o, int r, int g, int b);

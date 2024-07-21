@@ -40,7 +40,7 @@ static char	*file_init(t_game_root *root)
 	return (file);
 }
 
-static void	map_width(t_game_root *root, char *file)
+void	map_width(t_game_root *root, char *file)
 {
 	root->game->map_width = 0;
 	while (file[root->game->map_width] && file[root->game->map_width] != '\n')
@@ -85,7 +85,7 @@ void	initialize_map(t_game_root *root, char *filename)
 		root_destroy(root, filename, errno);
 	file = file_init(root);
 	line = get_next_line(fd);
-	while (line)
+	while (line != NULL)
 	{
 		process_line(root, &file, line);
 		line = get_next_line(fd);

@@ -18,15 +18,11 @@ LFT			=	libft/libft.a
 INC			=	-I ./inc -I ./libft -I ./mlx
 LIB			=	-L ./libft -lft -L ./mlx -lmlx -lXext -lX11 -lm -lbsd
 
-SRC			=	src/handle_error.c \
-				src/draw_and_render.c \
+SRC			=	src/draw_and_render.c \
 				src/handle_key_event.c \
-				src/free_game_resources.c \
-				src/calculate_map_height.c \
 				src/initialize_map.c \
 				src/map_isvalid.c \
 				src/map_parsing.c \
-				src/map_width.c \
 				src/mlx_utils.c \
 				src/movements_player.c \
 				src/root_destroy.c \

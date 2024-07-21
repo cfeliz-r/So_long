@@ -39,35 +39,6 @@ static void	flood_fill(char **tab, t_coordinates size, t_coordinates begin)
 	fill(tab, size, begin, target);
 }
 
-static char	**duplicate_map(t_game_root *root)
-{
-	char	**dup;
-	int		i;
-	int		j;
-
-	i = 0;
-	dup = malloc(sizeof(char *) * root->game->map_height
-			* root->game->map_width);
-	if (!dup)
-		return (NULL);
-	while (i < root->game->map_height)
-	{
-		dup[i] = malloc(sizeof(char) * (root->game->map_width + 1));
-		if (dup[i] == NULL)
-		{
-			while (i > 0)
-				free(dup[--i]);
-			free(dup);
-			return (NULL);
-		}
-		j = -1;
-		while (++j < root->game->map_width)
-			dup[i][j] = root->game->game_map[i][j];
-		dup[i++][root->game->map_width] = '\0';
-	}
-	return (dup);
-}
-
 static void	free_map_duplicate(char **map, int height)
 {
 	int		i;
@@ -76,6 +47,29 @@ static void	free_map_duplicate(char **map, int height)
 	while (i < height)
 		free(map[i++]);
 	free(map);
+}
+
+static char	**duplicate_map(t_game_root *root)
+{
+	char	**dup;
+	int		i;
+	int		j;
+
+	i = 0;
+	dup = malloc(sizeof(char *) * root->game->map_height);
+	if (!dup)
+		return (NULL);
+	while (i < root->game->map_height)
+	{
+		dup[i] = malloc(sizeof(char) * (root->game->map_width + 1));
+		if (dup[i] == NULL)
+			free_map_duplicate(dup, i);
+		j = -1;
+		while (++j < root->game->map_width)
+			dup[i][j] = root->game->game_map[i][j];
+		dup[i++][root->game->map_width] = '\0';
+	}
+	return (dup);
 }
 
 int	is_accessible(t_game_root *root)
