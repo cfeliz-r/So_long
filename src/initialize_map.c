@@ -57,9 +57,9 @@ static void	read_map_file(t_game_root *root, char *file)
 	map_width(root, file);
 	calculate_map_height(root, file);
 	map_isvalid(root, file);
-	root->game->collectibles = (t_coordinates *)malloc(sizeof(t_coordinates)
-			* root->game->total_collectibles);
-	if (root->game->collectibles == 0)
+	root->game->collectables = (t_coordinates *)malloc(sizeof(t_coordinates)
+			* root->game->total_collectables);
+	if (root->game->collectables == 0)
 	{
 		free(file);
 		root_destroy(root, "read_map_file(): malloc() collectibles", errno);

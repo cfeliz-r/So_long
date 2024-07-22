@@ -26,11 +26,11 @@ static void	texture_load(t_game_root *root, t_img **img, char *path)
 
 static void	texture_init(t_game_root *root)
 {
-	texture_load(root, &root->player, "./textures/player.xpm");
+	texture_load(root, &root->player_img, "./textures/player.xpm");
 	texture_load(root, &root->exit_image, "./textures/helicopter.xpm");
-	texture_load(root, &root->collectible_image, "./textures/gas.xpm");
-	texture_load(root, &root->wall, "./textures/wall.xpm");
-	texture_load(root, &root->ground, "./textures/sand.xpm");
+	texture_load(root, &root->collectable_image, "./textures/gas.xpm");
+	texture_load(root, &root->wall_img, "./textures/wall.xpm");
+	texture_load(root, &root->ground_img, "./textures/sand.xpm");
 }
 
 static void	renderer_init(t_game_root *root)
@@ -54,12 +54,12 @@ static void	initialize_game(t_game_root *root, char *filename)
 	if (root->game == 0)
 		root_destroy(root, "initialize_game(): malloc()", errno);
 	root->game->game_map = 0;
-	root->game->collectibles = 0;
-	root->game->total_collectibles = 0;
+	root->game->collectables = 0;
+	root->game->total_collectables = 0;
 	root->game->total_exits = 0;
 	root->game->total_players = 0;
 	root->game->player_move = 0;
-	root->game->player_collectible_count = 0;
+	root->game->player_collectable_count = 0;
 	root->game->player_up = 0;
 	root->game->player_down = 0;
 	root->game->player_left = 0;
@@ -78,11 +78,11 @@ t_game_root	*root_init(char *filename)
 	root->mlx_instance = 0;
 	root->mlx_window = 0;
 	root->mlx_img = 0;
-	root->player = 0;
+	root->player_img = 0;
 	root->exit_image = 0;
-	root->collectible_image = 0;
-	root->wall = 0;
-	root->ground = 0;
+	root->collectable_image = 0;
+	root->wall_img = 0;
+	root->ground_img = 0;
 	initialize_game(root, filename);
 	renderer_init(root);
 	texture_init(root);

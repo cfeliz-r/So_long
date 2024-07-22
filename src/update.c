@@ -28,14 +28,14 @@ static void	can_collectable(t_game_root *root)
 	int				k;
 
 	k = 0;
-	while (k < root->game->total_collectibles)
+	while (k < root->game->total_collectables)
 	{
-		if (root->game->collectibles[k].x == root->game->player_position.x
-			&& root->game->collectibles[k].y == root->game->player_position.y)
+		if (root->game->collectables[k].x == root->game->player_position.x
+			&& root->game->collectables[k].y == root->game->player_position.y)
 		{
-			root->game->collectibles[k].x = -1;
-			root->game->collectibles[k].y = -1;
-			root->game->player_collectible_count++;
+			root->game->collectables[k].x = -1;
+			root->game->collectables[k].y = -1;
+			root->game->player_collectable_count++;
 		}
 		k++;
 	}
@@ -61,7 +61,7 @@ void	update(t_game_root *root)
 	render_frame(root);
 	if (root->game->exit_position.x == root->game->player_position.x
 		&& root->game->exit_position.y == root->game->player_position.y)
-		if (root->game->total_collectibles
-			== root->game->player_collectible_count)
+		if (root->game->total_collectables
+			== root->game->player_collectable_count)
 			root_destroy(root, 0, 0);
 }

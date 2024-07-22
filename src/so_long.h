@@ -6,7 +6,7 @@
 /*   By: cfeliz-r <cfeliz-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/16 16:39:13 by cfeliz-r          #+#    #+#             */
-/*   Updated: 2024/07/20 19:10:26 by cfeliz-r         ###   ########.fr       */
+/*   Updated: 2024/07/22 12:30:14 by cfeliz-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,10 +35,10 @@ typedef struct s_game
 	int				player_left;
 	int				player_right;
 	int				player_move;
-	int				player_collectible_count;
+	int				player_collectable_count;
 	t_coordinates	exit_position;
-	t_coordinates	*collectibles;
-	int				total_collectibles;
+	t_coordinates	*collectables;
+	int				total_collectables;
 	int				total_exits;
 	int				total_players;
 }				t_game_state;
@@ -49,11 +49,11 @@ typedef struct s_root
 	void			*mlx_window;
 	t_img			*mlx_img;
 	t_game_state	*game;
-	t_img			*player;
+	t_img			*player_img;
 	t_img			*exit_image;
-	t_img			*collectible_image;
-	t_img			*wall;
-	t_img			*ground;
+	t_img			*collectable_image;
+	t_img			*wall_img;
+	t_img			*ground_img;
 }				t_game_root;
 
 void			render_frame(t_game_root *root);

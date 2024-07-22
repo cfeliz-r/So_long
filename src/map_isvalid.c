@@ -6,7 +6,7 @@
 /*   By: cfeliz-r <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/16 17:05:23 by cfeliz-r          #+#    #+#             */
-/*   Updated: 2024/07/20 15:28:19 by cfeliz-r         ###   ########.fr       */
+/*   Updated: 2024/07/22 12:24:48 by cfeliz-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ static void	isvalid(t_game_root *root, char *file, int i)
 	else if (file[i] == 'E')
 		root->game->total_exits++;
 	else if (file[i] == 'C')
-		root->game->total_collectibles++;
+		root->game->total_collectables++;
 	else if (file[i] == '1' || file[i] == '0')
 		return ;
 	else
@@ -61,7 +61,7 @@ void	map_isvalid(t_game_root *root, char *file)
 	}
 	if (root->game->total_players != 1
 		|| root->game->total_exits != 1
-		|| root->game->total_collectibles < 1)
+		|| root->game->total_collectables < 1)
 	{
 		free(file);
 		root_destroy(root, "map configuration is invalid", 0);
@@ -80,7 +80,7 @@ void	calculate_map_height(t_game_root *root, char *file)
 		line_length = 0;
 		while (file[i + line_length] != 0 && file[i + line_length] != '\n')
 			line_length++;
-		if(root->game->map_width != line_length)
+		if (root->game->map_width != line_length)
 		{
 			free(file);
 			root_destroy(root, "map isn't rectangular", 0);
@@ -96,8 +96,8 @@ void	free_game_resources(t_game_state *game)
 
 	if (game != 0)
 	{
-		if (game->collectibles != 0)
-			free(game->collectibles);
+		if (game->collectables != 0)
+			free(game->collectables);
 		if (game->game_map != 0)
 		{
 			i = 0;

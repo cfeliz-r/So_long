@@ -6,7 +6,7 @@
 /*   By: cfeliz-r <cfeliz-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/19 13:20:32 by cfeliz-r          #+#    #+#             */
-/*   Updated: 2024/07/20 18:19:40 by cfeliz-r         ###   ########.fr       */
+/*   Updated: 2024/07/22 12:26:45 by cfeliz-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,10 +88,10 @@ int	is_accessible(t_game_root *root)
 		[root->game->exit_position.x] != 'F')
 		return (free_map_duplicate(map_copy, size.y), 0);
 	i = -1;
-	while (++i < root->game->total_collectibles)
+	while (++i < root->game->total_collectables)
 	{
-		if (map_copy[root->game->collectibles[i].y]
-			[root->game->collectibles[i].x] != 'F')
+		if (map_copy[root->game->collectables[i].y]
+			[root->game->collectables[i].x] != 'F')
 			return (free_map_duplicate(map_copy, size.y), 0);
 	}
 	if (map_copy[root->game->player_position.y]

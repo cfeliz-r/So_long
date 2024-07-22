@@ -40,13 +40,13 @@ static void	draw_environment_objects(t_game_root *root, int i, int j)
 	if (root->game->exit_position.x == i && root->game->exit_position.y == j)
 		draw_image_square(root, root->exit_image, i * 40, j * 40);
 	k = -1;
-	while (++k < root->game->total_collectibles)
-		if (root->game->collectibles[k].x == i
-			&& root->game->collectibles[k].y == j)
-			draw_image_square(root, root->collectible_image, i * 40, j * 40);
+	while (++k < root->game->total_collectables)
+		if (root->game->collectables[k].x == i
+			&& root->game->collectables[k].y == j)
+			draw_image_square(root, root->collectable_image, i * 40, j * 40);
 	if (root->game->player_position.x == i
 		&& root->game->player_position.y == j)
-		draw_image_square(root, root->player, i * 40, j * 40);
+		draw_image_square(root, root->player_img, i * 40, j * 40);
 }
 
 static void	render_game_map(t_game_root *root)
@@ -61,9 +61,9 @@ static void	render_game_map(t_game_root *root)
 		while (i < root->game->map_width)
 		{
 			if (root->game->game_map[j][i] == 1)
-				draw_image_square(root, root->wall, i * 40, j * 40);
+				draw_image_square(root, root->wall_img, i * 40, j * 40);
 			else
-				draw_image_square(root, root->ground, i * 40, j * 40);
+				draw_image_square(root, root->ground_img, i * 40, j * 40);
 			draw_environment_objects(root, i, j);
 			i++;
 		}

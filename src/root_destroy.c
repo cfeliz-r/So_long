@@ -28,16 +28,16 @@ void	root_destroy(t_game_root *root, char *error_msg, int error_num)
 {
 	if (root != NULL)
 	{
-		if (root->ground != 0)
-			mlx_destroy_image(root->mlx_instance, root->ground);
-		if (root->wall != 0)
-			mlx_destroy_image(root->mlx_instance, root->wall);
-		if (root->collectible_image != 0)
-			mlx_destroy_image(root->mlx_instance, root->collectible_image);
+		if (root->ground_img != 0)
+			mlx_destroy_image(root->mlx_instance, root->ground_img);
+		if (root->wall_img != 0)
+			mlx_destroy_image(root->mlx_instance, root->wall_img);
+		if (root->collectable_image != 0)
+			mlx_destroy_image(root->mlx_instance, root->collectable_image);
 		if (root->exit_image != 0)
 			mlx_destroy_image(root->mlx_instance, root->exit_image);
-		if (root->player != 0)
-			mlx_destroy_image(root->mlx_instance, root->player);
+		if (root->player_img != 0)
+			mlx_destroy_image(root->mlx_instance, root->player_img);
 		if (root->mlx_img != 0)
 			mlx_destroy_image(root->mlx_instance, root->mlx_img);
 		if (root->mlx_window != 0)

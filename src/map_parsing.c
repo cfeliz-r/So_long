@@ -41,9 +41,9 @@ static void	get_coordinates(t_game_root *root, char *file, int k, int *obj)
 	}
 	else if (file[k] == 'C')
 	{
-		root->game->collectibles[*obj].x = k
+		root->game->collectables[*obj].x = k
 			% (root->game->map_width + 1);
-		root->game->collectibles[*obj].y = k
+		root->game->collectables[*obj].y = k
 			/ (root->game->map_width + 1);
 		file[k] = '0';
 		(*obj)++;
