@@ -12,7 +12,7 @@
 
 #include "so_long.h"
 
-static void	had_move(t_game_root *root, int x, int y)
+static void	print_move_terminal(t_game_root *root, int x, int y)
 {
 	if (root->game->player_position.x != x
 		|| root->game->player_position.y != y)
@@ -23,7 +23,7 @@ static void	had_move(t_game_root *root, int x, int y)
 	}
 }
 
-static void	iscollectable(t_game_root *root)
+static void	can_collectable(t_game_root *root)
 {
 	int				k;
 
@@ -56,8 +56,8 @@ void	update(t_game_root *root)
 		move_left(root, x, y);
 	else if (root->game->player_right != 0)
 		move_right(root, x, y);
-	had_move(root, x, y);
-	iscollectable(root);
+	print_move_terminal(root, x, y);
+	can_collectable(root);
 	render_frame(root);
 	if (root->game->exit_position.x == root->game->player_position.x
 		&& root->game->exit_position.y == root->game->player_position.y)

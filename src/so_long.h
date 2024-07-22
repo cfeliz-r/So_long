@@ -16,7 +16,7 @@
 # include <errno.h>
 # include <mlx.h>
 # include <mlx_int.h>
-# include "libft.h"
+# include "../libft/libft.h"
 
 typedef struct s_coordinates
 {

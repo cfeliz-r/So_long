@@ -12,7 +12,7 @@
 
 #include "so_long.h"
 
-int	isber(char *file)
+int	check_is_ber(char *file)
 {
 	int				len;
 
@@ -32,7 +32,7 @@ int	main(int ac, char *av[])
 
 	if (ac != 2)
 		exit_with_error("invalid number of arguments", 0);
-	if (isber(av[1]) == 0)
+	if (check_is_ber(av[1]) == 0)
 		exit_with_error("invalid argument (<name>.ber)", 0);
 	root = root_init(av[1]);
 	if (!is_accessible(root))
