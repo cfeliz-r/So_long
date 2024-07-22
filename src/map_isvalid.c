@@ -12,34 +12,6 @@
 
 #include "so_long.h"
 
-/*
-static int isborder(t_game_root *root, int i) {
-    int line_length = root->game->map_width + 1; // +1 for the newline character
-
-    // First row
-    if (i < root->game->map_width) {
-        return (1);
-    }
-
-    // Last row
-    if (i >= (line_length) * (root->game->map_height - 1)) {
-        return (1);
-    }
-
-    // First column (excluding the newline character position)
-    if (i % line_length == 0) {
-        return (1);
-    }
-
-    // Last column (excluding the newline character position)
-    if ((i + 1) % line_length == root->game->map_width) {
-        return (1);
-    }
-
-    return (0);
-}
-
- */
 static int	isborder(t_game_root *root, int i)
 {
 	if (i < root->game->map_width
@@ -78,10 +50,8 @@ void	map_isvalid(t_game_root *root, char *file)
 			continue ;
 		if (isborder(root, i))
 		{
-			printf("i: %d\n", i);
 			if (file[i] != '1')
 			{
-				printf("file[i]: %c\n", file[i]);
 				free(file);
 				root_destroy(root, "map isn't surrounded by walls", 0);
 			}
@@ -103,20 +73,20 @@ void	calculate_map_height(t_game_root *root, char *file)
 	int		i;
 	int		line_length;
 
-	i = 0;
 	root->game->map_height = 1;
-	while (file[i] != '\0')
+	i = root->game->map_width + 1;
+	while (file[i] != 0)
 	{
 		line_length = 0;
-		while (file[i] != '\0' && file[i] != '\n')
-		{
+		while (file[i + line_length] != 0 && file[i + line_length] != '\n')
 			line_length++;
-			i++;
+		if(root->game->map_width != line_length)
+		{
+			free(file);
+			root_destroy(root, "map isn't rectangular", 0);
 		}
-		if (file[i] == '\n')
-			i++;
-		if (file[i] != '\0')
-			root->game->map_height++;
+		root->game->map_height++;
+		i += root->game->map_width + 1;
 	}
 }
 

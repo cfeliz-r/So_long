@@ -51,7 +51,7 @@ static void	renderer_init(t_game_root *root)
 static void	initialize_game(t_game_root *root, char *filename)
 {
 	root->game = (t_game_state *)malloc(sizeof(t_game_state));
-	if (!root->game)
+	if (root->game == 0)
 		root_destroy(root, "initialize_game(): malloc()", errno);
 	root->game->game_map = 0;
 	root->game->collectibles = 0;
@@ -72,7 +72,7 @@ t_game_root	*root_init(char *filename)
 	t_game_root			*root;
 
 	root = (t_game_root *)malloc(sizeof(t_game_root));
-	if (!root)
+	if (root == 0)
 		root_destroy(0, "root_init(): malloc()", errno);
 	root->game = 0;
 	root->mlx_instance = 0;
