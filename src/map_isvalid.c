@@ -6,31 +6,31 @@
 /*   By: cfeliz-r <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/16 17:05:23 by cfeliz-r          #+#    #+#             */
-/*   Updated: 2024/07/22 12:24:48 by cfeliz-r         ###   ########.fr       */
+/*   Updated: 2024/07/22 14:50:49 by cfeliz-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-static int	isborder(t_game_root *root, int i)
+static int	isborder(t_game_root *root, int pos)
 {
-	if (i < root->game->map_width
-		|| i > (root->game->map_width + 1) * (root->game->map_height - 1)
-		|| i % (root->game->map_width + 1) == 0
-		|| i % (root->game->map_width + 1) == root->game->map_width - 1)
+	if (pos < root->game->map_width
+		|| pos > (root->game->map_width + 1) * (root->game->map_height - 1)
+		|| pos % (root->game->map_width + 1) == 0
+		|| pos % (root->game->map_width + 1) == root->game->map_width - 1)
 		return (1);
 	return (0);
 }
 
-static void	isvalid(t_game_root *root, char *file, int i)
+static void	isvalid(t_game_root *root, char *file, int position)
 {
-	if (file[i] == 'P')
+	if (file[position] == 'P')
 		root->game->total_players++;
-	else if (file[i] == 'E')
+	else if (file[position] == 'E')
 		root->game->total_exits++;
-	else if (file[i] == 'C')
+	else if (file[position] == 'C')
 		root->game->total_collectables++;
-	else if (file[i] == '1' || file[i] == '0')
+	else if (file[position] == '1' || file[position] == '0')
 		return ;
 	else
 	{
@@ -41,23 +41,23 @@ static void	isvalid(t_game_root *root, char *file, int i)
 
 void	map_isvalid(t_game_root *root, char *file)
 {
-	int		i;
+	int		position;
 
-	i = -1;
-	while (file[++i] != 0)
+	position = -1;
+	while (file[++position] != 0)
 	{
-		if (file[i] == '\n')
+		if (file[position] == '\n')
 			continue ;
-		if (isborder(root, i))
+		if (isborder(root, position))
 		{
-			if (file[i] != '1')
+			if (file[position] != '1')
 			{
 				free(file);
 				root_destroy(root, "map isn't surrounded by walls", 0);
 			}
 		}
 		else
-			isvalid(root, file, i);
+			isvalid(root, file, position);
 	}
 	if (root->game->total_players != 1
 		|| root->game->total_exits != 1
@@ -73,20 +73,25 @@ void	calculate_map_height(t_game_root *root, char *file)
 	int		i;
 	int		line_length;
 
-	root->game->map_height = 1;
-	i = root->game->map_width + 1;
-	while (file[i] != 0)
+	i = 0;
+	root->game->map_height = 0;
+	while (file[i] != '\0')
 	{
 		line_length = 0;
-		while (file[i + line_length] != 0 && file[i + line_length] != '\n')
+		while (file[i] != '\0' && file[i] != '\n')
+		{
 			line_length++;
+			i++;
+		}
 		if (root->game->map_width != line_length)
 		{
 			free(file);
-			root_destroy(root, "map isn't rectangular", 0);
+			root_destroy(root, "map is invalid, is not rectangular", 0);
 		}
-		root->game->map_height++;
-		i += root->game->map_width + 1;
+		if (line_length > 0)
+			root->game->map_height++;
+		if (file[i] == '\n')
+			i++;
 	}
 }
 

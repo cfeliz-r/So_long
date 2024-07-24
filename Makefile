@@ -6,18 +6,17 @@
 #    By: cfeliz-r <cfeliz-r@student.your42network.  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/07/17 01:02:12 by cfeliz-r          #+#    #+#              #
-#    Updated: 2024/07/17 01:02:24 by cfeliz-r         ###   ########.fr        #
+#    Updated: 2024/07/22 15:59:19 by cfeliz-r         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME		=	so_long
 CC			=	gcc
-FLAGS		=	-Wall -Wextra -Werror -g3 -fsanitize=address,undefined
-MLX_DIR		=	mlx
+FLAGS		=	-Wall -Wextra -Werror
+MLX_DIR		=	minilibx-linux
 LFT			=	libft/libft.a
-INC			=	-I ./inc -I ./libft -I ./mlx
-LIB			=	-L ./libft -lft -L ./mlx -lmlx -lXext -lX11 -lm -lbsd
-
+INC			=	-I ./libft -I ./minilibx-linux
+LIB			=	-L ./libft -lft -L ./minilibx-linux -lmlx -lXext -lX11 -lm -lbsd
 SRC			=	src/draw_and_render.c \
 				src/handle_key_event.c \
 				src/initialize_map.c \

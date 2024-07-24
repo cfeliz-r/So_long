@@ -6,7 +6,7 @@
 /*   By: cfeliz-r <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/16 17:05:03 by cfeliz-r          #+#    #+#             */
-/*   Updated: 2024/07/20 19:04:25 by cfeliz-r         ###   ########.fr       */
+/*   Updated: 2024/07/22 14:10:02 by cfeliz-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ static void	process_line(t_game_root *root, char **file, char *line)
 	free(*file);
 	*file = tmp;
 	free(line);
-	if (*file == 0)
+	if (!*file)
 		root_destroy(root, "process_line(): ft_strjoin()", errno);
 }
 
@@ -85,7 +85,7 @@ void	initialize_map(t_game_root *root, char *filename)
 		root_destroy(root, filename, errno);
 	file = file_init(root);
 	line = get_next_line(fd);
-	while (line != NULL)
+	while (line)
 	{
 		process_line(root, &file, line);
 		line = get_next_line(fd);
