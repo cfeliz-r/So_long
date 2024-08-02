@@ -12,7 +12,7 @@
 
 #include "so_long.h"
 
-static void	draw_image_square(t_game_root *root, t_img *img, int x, int y)
+static void	draw_image(t_game_root *root, t_img *img, int x, int y)
 {
 	unsigned int	color;
 	int				i;
@@ -33,41 +33,41 @@ static void	draw_image_square(t_game_root *root, t_img *img, int x, int y)
 	}
 }
 
-static void	draw_environment_objects(t_game_root *root, int i, int j)
+static void	draw_environment_objects(t_game_root *root, int x, int y)
 {
 	int				k;
 
-	if (root->game->exit_position.x == i && root->game->exit_position.y == j)
-		draw_image_square(root, root->exit_image, i * 40, j * 40);
+	if (root->game->exit_position.x == x && root->game->exit_position.y == y)
+		draw_image(root, root->exit_image, x * 40, y * 40);
 	k = -1;
 	while (++k < root->game->total_collectables)
-		if (root->game->collectables[k].x == i
-			&& root->game->collectables[k].y == j)
-			draw_image_square(root, root->collectable_image, i * 40, j * 40);
-	if (root->game->player_position.x == i
-		&& root->game->player_position.y == j)
-		draw_image_square(root, root->player_img, i * 40, j * 40);
+		if (root->game->collectables[k].x == x
+			&& root->game->collectables[k].y == y)
+			draw_image(root, root->collectable_image, x * 40, y * 40);
+	if (root->game->player_position.x == x
+		&& root->game->player_position.y == y)
+		draw_image(root, root->player_img, x * 40, y * 40);
 }
 
 static void	render_game_map(t_game_root *root)
 {
-	int				i;
-	int				j;
+	int				x;
+	int				y;
 
-	j = 0;
-	while (j < root->game->map_height)
+	y = 0;
+	while (y < root->game->map_height)
 	{
-		i = 0;
-		while (i < root->game->map_width)
+		x = 0;
+		while (x < root->game->map_width)
 		{
-			if (root->game->game_map[j][i] == 1)
-				draw_image_square(root, root->wall_img, i * 40, j * 40);
+			if (root->game->game_map[y][x] == 1)
+				draw_image(root, root->wall_img, x * 40, y * 40);
 			else
-				draw_image_square(root, root->ground_img, i * 40, j * 40);
-			draw_environment_objects(root, i, j);
-			i++;
+				draw_image(root, root->ground_img, x * 40, y * 40);
+			draw_environment_objects(root, x, y);
+			x++;
 		}
-		j++;
+		y++;
 	}
 }
 

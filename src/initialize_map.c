@@ -45,10 +45,11 @@ void	map_width(t_game_root *root, char *file)
 	root->game->map_width = 0;
 	while (file[root->game->map_width] && file[root->game->map_width] != '\n')
 		root->game->map_width++;
-	if (root->game->map_width == 0 || file[root->game->map_width] == 0)
+	if ((root->game->map_width > 49
+			|| root->game->map_width == 0 || file[root->game->map_width] == 0))
 	{
 		free(file);
-		root_destroy(root, "map file is invalid", 0);
+		root_destroy(root, "map is invalid", 0);
 	}
 }
 

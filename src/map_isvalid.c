@@ -83,13 +83,14 @@ void	calculate_map_height(t_game_root *root, char *file)
 			line_length++;
 			i++;
 		}
-		if (root->game->map_width != line_length)
-		{
-			free(file);
-			root_destroy(root, "map is invalid, is not rectangular", 0);
-		}
 		if (line_length > 0)
 			root->game->map_height++;
+		if (root->game->map_width != line_length
+			|| root->game->map_height >= 50)
+		{
+			free(file);
+			root_destroy(root, "map is invalid", 0);
+		}
 		if (file[i] == '\n')
 			i++;
 	}

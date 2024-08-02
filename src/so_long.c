@@ -6,7 +6,7 @@
 /*   By: cfeliz-r <cfeliz-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/16 17:07:15 by cfeliz-r          #+#    #+#             */
-/*   Updated: 2024/07/20 18:22:56 by cfeliz-r         ###   ########.fr       */
+/*   Updated: 2024/08/01 14:59:42 by cfeliz-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,12 +21,14 @@ int	check_is_ber(char *file)
 		return (0);
 	if (len < 5)
 		return (0);
+	if (ft_strcmp(file + len - 5, "/.ber") == 0)
+		return (0);
 	if (ft_strcmp(file + len - 4, ".ber") != 0)
 		return (0);
 	return (1);
 }
 
-int	main(int ac, char *av[])
+int	main(int ac, char **av)
 {
 	t_game_root			*root;
 
@@ -35,7 +37,7 @@ int	main(int ac, char *av[])
 	if (check_is_ber(av[1]) == 0)
 		exit_with_error("invalid argument (<name>.ber)", 0);
 	root = root_init(av[1]);
-	if (!is_accessible(root))
+	if (is_accessible(root) == 0)
 		root_destroy(root, "Some objects are not accessible", 0);
 	render_frame(root);
 	mlx_hook(root->mlx_window, 2, 1L << 0, handle_key_press, root);

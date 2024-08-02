@@ -6,13 +6,13 @@
 #    By: cfeliz-r <cfeliz-r@student.your42network.  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/07/17 01:02:12 by cfeliz-r          #+#    #+#              #
-#    Updated: 2024/07/22 15:59:19 by cfeliz-r         ###   ########.fr        #
+#    Updated: 2024/07/29 12:36:29 by cfeliz-r         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME		=	so_long
 CC			=	gcc
-FLAGS		=	-Wall -Wextra -Werror
+FLAGS		=	-Wall -Wextra -Werror -g -fsanitize=address
 MLX_DIR		=	minilibx-linux
 LFT			=	libft/libft.a
 INC			=	-I ./libft -I ./minilibx-linux
